@@ -18,7 +18,9 @@
     "typescript": "~3.7.2"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "concurrently npm:start:*",
+    "start:spa": "react-scripts start",
+    "start:mock": "./node_modules/json-server/lib/cli/bin.js --watch ./mock-server/db.json --port 4000",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -39,6 +41,8 @@
     ]
   },
   "devDependencies": {
+    "concurrently": "^5.2.0",
+    "json-server": "^0.16.1",
     "node-sass": "^4.14.1"
   }
 }

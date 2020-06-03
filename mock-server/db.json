@@ -1,0 +1,26 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "email": "john.19col@gmail.com",
+      "password": "123456",
+      "name": "John"
+    },
+    {
+      "id": 2,
+      "email": "johndoe@mail.com",
+      "password": "123456",
+      "name": "John Doe"
+    }
+  ],
+  "movies": [
+    {
+      "userId": 1,
+      "movies": ["tt0384537", "tt7286456", "tt1591095"]
+    },
+    {
+      "userId": 2,
+      "movies": ["tt0384537"]
+    }
+  ]
+}
