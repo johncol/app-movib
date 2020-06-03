@@ -3,14 +3,14 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
 
-import './App.scss';
+import './Login.scss';
 
-export const App = () => {
+export const Login = () => {
   return (
-    <div className="app">
-      <Card>
-        <Card.Body>
-          <Form className="login-form">
+    <div className="login">
+      <Form className="login-form">
+        <Card>
+          <Card.Body>
             <Form.Group controlId="formBasicEmail">
               <Form.Label>Email address</Form.Label>
               <Form.Control type="email" placeholder="Enter email" />
@@ -21,11 +21,11 @@ export const App = () => {
               <Form.Control type="password" placeholder="Password" />
             </Form.Group>
             <Button variant="primary" type="submit">
-              Submit
+              Login
             </Button>
-          </Form>
-        </Card.Body>
-      </Card>
+          </Card.Body>
+        </Card>
+      </Form>
     </div>
   );
 };
