@@ -1,0 +1,9 @@
+.alert {
+  border-radius: 0;
+  border: none;
+
+  &.alert-warning {
+    background: #b3aa63;
+    color: white;
+  }
+}

@@ -1,0 +1,28 @@
+.btn {
+  border-radius: 0;
+  border: 0;
+  transition: all 0.2s ease-in;
+}
+
+.btn-primary {
+  background-color: $color-black-darker;
+
+  &:hover {
+    background-color: $color-pink;
+    color: white;
+  }
+
+  &:focus {
+    background-color: $color-pink !important;
+    box-shadow: none !important;
+  }
+
+  &:active {
+    background-color: $color-pink-darker !important;
+    box-shadow: none !important;
+  }
+
+  &:disabled {
+    background-color: $color-black-lighter;
+  }
+}

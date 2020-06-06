@@ -1,0 +1,24 @@
+.form-group {
+  margin-bottom: 2em;
+}
+
+.form-label {
+  margin-bottom: 0.2em;
+}
+
+.form-control {
+  background-color: transparent;
+  color: $color-grey;
+  border-radius: 0;
+  border: none;
+  border-bottom: 1px solid $color-grey;
+
+  &:focus,
+  &:active {
+    background-color: transparent;
+    color: $color-grey-lighter;
+    outline: none;
+    box-shadow: none;
+    border-color: $color-grey-lighter;
+  }
+}

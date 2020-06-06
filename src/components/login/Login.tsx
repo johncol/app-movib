@@ -27,13 +27,9 @@ export const Login = () => {
 
   return (
     <div className="login">
-      <Form className="login-form" onSubmit={login}>
+      <Form className="login-form" onSubmit={login} autoComplete="off">
         <Card>
           <Card.Body>
-            <h2>Login</h2>
-
-            {formSubmitted && <Alert variant="warning">Wrong credentials</Alert>}
-
             <Form.Group controlId="formBasicEmail">
               <Form.Label>Email address</Form.Label>
               <Form.Control
@@ -53,7 +49,16 @@ export const Login = () => {
                 onChange={(event) => setPassword(event.target.value)}
               />
             </Form.Group>
-            <Button variant="primary" type="submit" disabled={!formIsValid(email, password)}>
+
+            {formSubmitted && <Alert variant="warning">Wrong credentials</Alert>}
+
+            <Button
+              variant="primary"
+              size="lg"
+              type="submit"
+              disabled={!formIsValid(email, password)}
+              block
+            >
               Login
             </Button>
           </Card.Body>
