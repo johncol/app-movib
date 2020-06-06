@@ -1,23 +1,30 @@
 import React, { FormEvent, useState } from 'react';
+import { Redirect } from 'react-router-dom';
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
 import Alert from 'react-bootstrap/Alert';
 import Button from 'react-bootstrap/Button';
 
 import { User, session } from '../../services/session';
+import { Path } from '../../constants/paths';
 import './Login.scss';
 
 export const Login = () => {
+  const [logged, setLogged] = useState(false);
   const [email, setEmail] = useState('john.19col@gmail.com');
   const [password, setPassword] = useState('123456');
   const [formSubmitted, setFormSubmitted] = useState(false);
+
+  if (logged) {
+    return <Redirect to={Path.DASHBOARD} />;
+  }
 
   const login = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setFormSubmitted(true);
     session.login(email, password).then(
       (user: User) => {
-        console.log('login successful, user:', user);
+        setLogged(true);
       },
       (error: Error) => {
         console.log('error', error.message);
