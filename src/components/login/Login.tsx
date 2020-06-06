@@ -10,26 +10,19 @@ import { Path } from '../../constants/paths';
 import './Login.scss';
 
 export const Login = () => {
-  const [logged, setLogged] = useState(false);
+  const [user, setUser] = useState<User | null>(null);
   const [email, setEmail] = useState('john.19col@gmail.com');
   const [password, setPassword] = useState('123456');
   const [formSubmitted, setFormSubmitted] = useState(false);
 
-  if (logged) {
+  if (user) {
     return <Redirect to={Path.DASHBOARD} />;
   }
 
   const login = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setFormSubmitted(true);
-    session.login(email, password).then(
-      (user: User) => {
-        setLogged(true);
-      },
-      (error: Error) => {
-        console.log('error', error.message);
-      }
-    );
+    session.login(email, password).then(setUser, console.log);
   };
 
   return (
