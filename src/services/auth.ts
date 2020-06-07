@@ -26,6 +26,6 @@ const login = async (email: string, password: string): Promise<User> => {
   return user;
 };
 
-export const session = {
+export const auth = {
   login,
 };

@@ -1,29 +1,39 @@
-import React, { FormEvent, useState } from 'react';
+import React, { FormEvent, useState, useContext } from 'react';
 import { Redirect } from 'react-router-dom';
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
 import Alert from 'react-bootstrap/Alert';
 import Button from 'react-bootstrap/Button';
 
-import { User, session } from '../../services/session';
+import { User, auth } from '../../services/auth';
 import { Path } from '../../constants/paths';
 import { Logo } from '../logo/Logo';
+import { SessionContext, Session } from '../../context/session';
 import './Login.scss';
 
 export const Login = () => {
-  const [user, setUser] = useState<User | null>(null);
   const [email, setEmail] = useState('john.19col@gmail.com');
   const [password, setPassword] = useState('123456');
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const session: Session = useContext(SessionContext);
 
-  if (user) {
+  if (session.user) {
     return <Redirect to={Path.DASHBOARD} />;
   }
 
   const login = (event: FormEvent<HTMLFormElement>) => {
+    setFormSubmitted(false);
     event.preventDefault();
-    setFormSubmitted(true);
-    session.login(email, password).then(setUser, console.log);
+    auth.login(email, password).then(
+      (user: User) => {
+        session.save(user);
+        setFormSubmitted(true);
+      },
+      (error: Error) => {
+        console.log(error);
+        setFormSubmitted(true);
+      }
+    );
   };
 
   return (
