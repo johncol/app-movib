@@ -7,6 +7,7 @@ import Button from 'react-bootstrap/Button';
 
 import { User, session } from '../../services/session';
 import { Path } from '../../constants/paths';
+import { Logo } from '../logo/Logo';
 import './Login.scss';
 
 export const Login = () => {
@@ -27,6 +28,7 @@ export const Login = () => {
 
   return (
     <div className="login">
+      <Logo />
       <Form className="login-form" onSubmit={login} autoComplete="off">
         <Card>
           <Card.Body>

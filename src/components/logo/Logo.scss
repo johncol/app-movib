@@ -1,0 +1,24 @@
+@import './../../styles/colors';
+
+.logo {
+  user-select: none;
+  font-weight: 100;
+  font-size: 5em;
+  text-align: center;
+  color: white;
+  line-height: 1;
+  min-width: 4em;
+
+  .logo-m {
+    color: $color-pink-darker;
+    display: inline-block;
+    border: 1px solid;
+    padding: 0.1em 0.2em;
+    border-radius: 50%;
+    margin-right: 0.1em;
+    animation-name: rotate;
+    animation-duration: 1s;
+    transform: rotate(360dg);
+    transition: transform 0.7s ease-out;
+  }
+}
