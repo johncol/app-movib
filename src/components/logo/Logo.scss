@@ -1,6 +1,7 @@
 @import './../../styles/colors';
 
 .logo {
+  font-family: Quicksand;
   user-select: none;
   font-weight: 100;
   font-size: 5em;
@@ -12,13 +13,40 @@
   .logo-m {
     color: $color-pink-darker;
     display: inline-block;
-    border: 1px solid;
+    border: 3px solid;
     padding: 0.1em 0.2em;
     border-radius: 50%;
     margin-right: 0.1em;
-    animation-name: rotate;
-    animation-duration: 1s;
-    transform: rotate(360dg);
-    transition: transform 0.7s ease-out;
+    animation-name: fromCenterToLeft;
+    animation-timing-function: ease-in;
+    animation-duration: 0.8s;
+    animation-fill-mode: forwards;
+  }
+
+  .logo-ovib {
+    opacity: 0;
+    animation-name: appear;
+    animation-timing-function: ease-in;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+    animation-delay: 0.5s;
+  }
+}
+
+@keyframes appear {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0.9;
+  }
+}
+
+@keyframes fromCenterToLeft {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0);
   }
 }
