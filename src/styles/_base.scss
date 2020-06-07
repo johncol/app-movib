@@ -1,3 +1,7 @@
+html {
+  font-size: 16px;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
@@ -6,6 +10,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
   color: $color-grey;
   background-color: $color-black;
+  font-size: 1rem;
+  min-width: 20rem;
 }
 
 h1,

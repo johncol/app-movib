@@ -1,0 +1,92 @@
+@import './../../styles/colors';
+
+.movie-poster {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  header {
+    max-height: 120vw;
+
+    .poster {
+      width: 100vw;
+      min-width: 20rem;
+    }
+  }
+
+  main {
+    position: relative;
+    margin-top: -12rem;
+    background-image: linear-gradient(to bottom, transparent, $color-black 7rem);
+
+    .title {
+      margin: 0;
+      padding: 5rem 0 0.5rem;
+      color: white;
+      font-weight: 400;
+      font-size: 2.5rem;
+    }
+
+    .additionalInfo {
+      font-size: 0.8rem;
+    }
+
+    .plot {
+      h3 {
+        font-size: 1.2rem;
+        font-weight: 400;
+        color: white;
+      }
+    }
+
+    .actors {
+      font-size: 0.9rem;
+      font-style: italic;
+
+      a,
+      a:visited {
+        color: inherit;
+      }
+    }
+  }
+
+  main,
+  footer {
+    padding: 0.5rem;
+  }
+
+  footer {
+    display: flex;
+    align-items: flex-end;
+    flex-grow: 1;
+    background-color: $color-black;
+
+    .imdb-rating {
+      height: 2rem;
+      display: flex;
+      align-items: center;
+      font-weight: 700;
+
+      a,
+      a:visited {
+        color: inherit;
+        margin-right: 0.5rem;
+
+        img {
+          max-height: 2rem;
+        }
+      }
+    }
+  }
+
+  section {
+    &:not(:first-child) {
+      margin-top: 1rem;
+    }
+  }
+
+  p {
+    margin: 0;
+  }
+}
