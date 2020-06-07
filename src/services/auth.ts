@@ -12,6 +12,8 @@ const login = async (email: string, password: string): Promise<User> => {
     },
   });
 
+  await new Promise((resolve) => setTimeout(resolve, 1000));
+
   const users: User[] = await response.json();
   if (users.length === 0) {
     throw new Error('Failed login');

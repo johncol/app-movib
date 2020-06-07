@@ -8,6 +8,7 @@ import Button from 'react-bootstrap/Button';
 import { User, auth } from '../../services/auth';
 import { Path } from '../../constants/paths';
 import { Logo } from '../logo/Logo';
+import { Spinner } from '../spinner/Spinner';
 import { SessionContext, Session } from '../../context/session';
 import './Login.scss';
 
@@ -15,6 +16,7 @@ export const Login = () => {
   const [email, setEmail] = useState('john.19col@gmail.com');
   const [password, setPassword] = useState('123456');
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
   const session: Session = useContext(SessionContext);
 
   if (session.user) {
@@ -22,16 +24,17 @@ export const Login = () => {
   }
 
   const login = (event: FormEvent<HTMLFormElement>) => {
-    setFormSubmitted(false);
+    setFormSubmitted(true);
+    setLoading(true);
     event.preventDefault();
     auth.login(email, password).then(
       (user: User) => {
         session.save(user);
-        setFormSubmitted(true);
+        setLoading(false);
       },
       (error: Error) => {
         console.log(error);
-        setFormSubmitted(true);
+        setLoading(false);
       }
     );
   };
@@ -49,6 +52,7 @@ export const Login = () => {
                 placeholder="Enter email"
                 value={email}
                 onChange={(event) => setEmail(event.target.value)}
+                disabled={loading}
               />
             </Form.Group>
 
@@ -59,16 +63,19 @@ export const Login = () => {
                 placeholder="Password"
                 value={password}
                 onChange={(event) => setPassword(event.target.value)}
+                disabled={loading}
               />
             </Form.Group>
 
-            {formSubmitted && <Alert variant="warning">Wrong credentials</Alert>}
+            {!loading && formSubmitted && <Alert variant="warning">Wrong credentials</Alert>}
+
+            {loading && <Spinner />}
 
             <Button
               variant="primary"
               size="lg"
               type="submit"
-              disabled={!formIsValid(email, password)}
+              disabled={!formIsValid(email, password) || loading}
               block
             >
               Login
