@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react';
 
 import { Movies, Movie } from '../../services/omdb';
-import { MoviePoster } from '../movie-poster/MoviePoster';
+import { MovieCard } from '../movie-card/MovieCard';
 
 import './Catalog.scss';
 
@@ -13,7 +13,7 @@ export const Catalog = ({ movies }: Props): ReactElement => {
   return (
     <div className="catalog">
       {movies.map((movie: Movie) => {
-        return <MoviePoster key={movie.imdbID} movie={movie} />;
+        return <MovieCard key={movie.imdbID} movie={movie} />;
       })}
     </div>
   );

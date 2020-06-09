@@ -1,7 +1,7 @@
 import React from 'react';
 import { Movie } from '../../services/omdb';
 
-import './MoviePoster.scss';
+import './MovieCard.scss';
 
 interface Props {
   movie: Movie;
@@ -12,9 +12,9 @@ interface Actor {
   link: string;
 }
 
-export const MoviePoster = ({ movie }: Props) => {
+export const MovieCard = ({ movie }: Props) => {
   return (
-    <section className="movie-poster">
+    <section className="movie-card">
       <header>
         <Poster movie={movie} />
       </header>
