@@ -1,0 +1,6 @@
+.catalog {
+  width: 100vw;
+  display: flex;
+  overflow: scroll;
+  scroll-snap-type: x mandatory;
+}

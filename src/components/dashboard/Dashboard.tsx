@@ -5,7 +5,7 @@ import { Redirect } from 'react-router-dom';
 import { Path } from '../../constants/paths';
 import { library } from '../../services/library';
 import { Movies } from '../../services/omdb';
-import { MoviePoster } from '../movie-poster/MoviePoster';
+import { Catalog } from '../catalog/Catalog';
 
 export const Dashboard = (): ReactElement => {
   const session: Session = useContext(SessionContext);
@@ -27,7 +27,7 @@ export const Dashboard = (): ReactElement => {
 
   return (
     <div className="dashboard">
-      <MoviePoster movie={movies[0]} />
+      <Catalog movies={movies} />
     </div>
   );
 };
