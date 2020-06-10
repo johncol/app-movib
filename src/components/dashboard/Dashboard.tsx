@@ -6,6 +6,7 @@ import { Path } from '../../constants/paths';
 import { library } from '../../services/library';
 import { Movies } from '../../services/omdb';
 import { Catalog } from '../catalog/Catalog';
+import { Menu } from '../menu/Menu';
 
 export const Dashboard = (): ReactElement => {
   const session: Session = useContext(SessionContext);
@@ -27,6 +28,7 @@ export const Dashboard = (): ReactElement => {
 
   return (
     <div className="dashboard">
+      <Menu />
       <Catalog movies={movies} />
     </div>
   );
