@@ -1,20 +1,30 @@
 import React, { ReactElement, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import { MenuIcon } from './menu-icon/MenuIcon';
-
+import { options, MenuOption } from '../../constants/menu-options';
 import './Menu.scss';
 
 export const Menu = (): ReactElement => {
   const [collapsed, setCollapsed] = useState(true);
+
   return (
     <nav className={`menu ${collapsed && 'collapsed'}`}>
-      <button onClick={() => setCollapsed((collapsed) => !collapsed)} className="menu-button">
+      <button
+        onClick={() => setCollapsed((collapsed) => !collapsed)}
+        className="menu-button"
+        aria-label="Toggle Menu"
+      >
         <MenuIcon collapsed={collapsed} />
       </button>
       <div className="menu-options">
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolorem totam, optio architecto
-        quibusdam libero fuga maiores, similique debitis alias omnis labore molestias consectetur
-        ipsam odio quia laudantium expedita incidunt ea.
+        <ul>
+          {options.map((action: MenuOption) => (
+            <li key={action.link}>
+              <Link to={action.link}>{action.label}</Link>
+            </li>
+          ))}
+        </ul>
       </div>
     </nav>
   );

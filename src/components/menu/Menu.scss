@@ -24,12 +24,37 @@
     height: 100vh;
     background-color: black;
     z-index: 10;
-    padding-top: 3rem;
     position: absolute;
     top: 0;
     left: -100vw;
     transition: left 0.3s ease-out;
     transform-origin: center;
+    display: flex;
+    align-items: center;
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      flex-grow: 1;
+
+      a,
+      a:visited {
+        display: block;
+        padding: 1.5rem;
+        text-align: center;
+        transition: all 0.1s ease-in;
+        color: rgba(255, 255, 255, 0.4);
+        font-weight: 200;
+        font-size: 1.8rem;
+      }
+
+      a:hover {
+        text-decoration: none;
+        background-color: $color-pink;
+        color: rgba(255, 255, 255, 0.5);
+      }
+    }
   }
 
   &:not(.collapsed) {
