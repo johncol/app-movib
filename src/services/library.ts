@@ -1,8 +1,17 @@
 import { omdb, Movies } from './omdb';
 
 interface UserMovie {
+  id: string;
+}
+
+interface WatchedMovie extends UserMovie {
+  score: number;
+}
+
+interface UserMovies {
   userId: number;
-  movies: string[];
+  toWatch: UserMovie[];
+  watched: WatchedMovie[];
 }
 
 const movies = async (user: number): Promise<Movies> => {
@@ -11,7 +20,7 @@ const movies = async (user: number): Promise<Movies> => {
       'Content-Type': 'application/json',
     },
   });
-  const matchingUsersMovies: UserMovie[] = await response.json();
+  const matchingUsersMovies: UserMovies[] = await response.json();
   console.log(`User ${user} movies response:`, matchingUsersMovies);
 
   if (matchingUsersMovies.length !== 1) {
@@ -19,8 +28,8 @@ const movies = async (user: number): Promise<Movies> => {
   }
 
   const [userMovies] = matchingUsersMovies;
-  const movies = userMovies.movies.map((movieId: string) => {
-    return omdb.movie(movieId);
+  const movies = userMovies.watched.map((movie: WatchedMovie) => {
+    return omdb.movie(movie.id);
   });
 
   return Promise.all(movies);

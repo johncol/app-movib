@@ -16,11 +16,16 @@
   "movies": [
     {
       "userId": 1,
-      "movies": ["tt0384537", "tt7286456", "tt1591095"]
+      "toWatch": [{ "id": "tt3335606" }],
+      "watched": [
+        { "id": "tt0816692", "score": 9 },
+        { "id": "tt0384537", "score": 8 },
+        { "id": "tt7286456", "score": 9 },
+        { "id": "tt1591095", "score": 8 }
+      ]
     },
     {
-      "userId": 2,
-      "movies": ["tt0384537"]
+      "userId": 2
     }
   ]
 }
