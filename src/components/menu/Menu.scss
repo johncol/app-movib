@@ -39,21 +39,31 @@
       transform: translateY(-50%) scale(0.5);
       transition: all 0.3s ease-out;
 
-      a,
-      a:visited {
-        display: block;
-        padding: 1.5rem;
-        text-align: center;
-        transition: all 0.1s ease-in;
-        color: rgba(255, 255, 255, 0.4);
-        font-weight: 200;
-        font-size: 1.8rem;
-      }
+      a {
+        &,
+        &:visited {
+          display: block;
+          padding: 1.5rem;
+          text-align: center;
+          transition: all 0.1s ease-in;
+          color: rgba(255, 255, 255, 0.4);
+          font-weight: 200;
+          font-size: 1.8rem;
+        }
 
-      a:hover {
-        text-decoration: none;
-        background-color: $color-pink;
-        color: rgba(255, 255, 255, 0.5);
+        &:hover {
+          text-decoration: none;
+
+          &:not(.active) {
+            background-color: $color-pink;
+            color: rgba(255, 255, 255, 0.5);
+          }
+        }
+
+        &.active {
+          color: $color-pink;
+          cursor: default;
+        }
       }
     }
   }

@@ -1,5 +1,5 @@
 import React, { ReactElement, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import { MenuIcon } from './menu-icon/MenuIcon';
 import { options, MenuOption } from '../../constants/menu-options';
@@ -21,9 +21,9 @@ export const Menu = (): ReactElement => {
         <ul>
           {options.map((action: MenuOption) => (
             <li key={action.link}>
-              <Link to={action.link} onClick={toggle}>
+              <NavLink to={action.link} onClick={toggle}>
                 {action.label}
-              </Link>
+              </NavLink>
             </li>
           ))}
         </ul>

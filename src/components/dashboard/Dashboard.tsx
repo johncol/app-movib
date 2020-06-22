@@ -30,7 +30,7 @@ const DashboardRouting = (): ReactElement => {
       <Route path={Path.LIST_WATCHED} component={CatalogWatched} />
       <Route path={Path.SEARCH} component={() => <div>Search..</div>} />
       <Route path={Path.FEATURES} component={Features} />
-      <Redirect path="*" to={Path.LIST_TO_WATCH} />
+      <Redirect path="*" to={Path.DASHBOARD} />
     </Switch>
   );
 };
