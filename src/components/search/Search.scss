@@ -1,0 +1,21 @@
+.search {
+  padding: 3rem 1.5rem;
+
+  .form-group {
+    position: relative;
+
+    label {
+      position: absolute;
+      right: 5px;
+      top: 0.5rem;
+    }
+
+    .clear-query-icon {
+      transition: color 0.1s ease-in;
+      &:hover {
+        cursor: pointer;
+        color: white;
+      }
+    }
+  }
+}

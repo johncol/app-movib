@@ -7,6 +7,9 @@ import { Menu } from '../menu/Menu';
 import { Features } from '../features/Features';
 import { CatalogToWatch } from '../catalog-to-watch/CatalogToWatch';
 import { CatalogWatched } from '../catalog-watched/CatalogWatched';
+import { Search } from '../search/Search';
+
+import './Dashboard.scss';
 
 export const Dashboard = (): ReactElement => {
   const session: Session = useContext(SessionContext);
@@ -24,13 +27,15 @@ export const Dashboard = (): ReactElement => {
 
 const DashboardRouting = (): ReactElement => {
   return (
-    <Switch>
-      <Redirect exact path={Path.DASHBOARD} to={Path.LIST_TO_WATCH} />
-      <Route path={Path.LIST_TO_WATCH} component={CatalogToWatch} />
-      <Route path={Path.LIST_WATCHED} component={CatalogWatched} />
-      <Route path={Path.SEARCH} component={() => <div>Search..</div>} />
-      <Route path={Path.FEATURES} component={Features} />
-      <Redirect path="*" to={Path.DASHBOARD} />
-    </Switch>
+    <div className="content-container">
+      <Switch>
+        <Redirect exact path={Path.DASHBOARD} to={Path.LIST_TO_WATCH} />
+        <Route path={Path.LIST_TO_WATCH} component={CatalogToWatch} />
+        <Route path={Path.LIST_WATCHED} component={CatalogWatched} />
+        <Route path={Path.SEARCH} component={Search} />
+        <Route path={Path.FEATURES} component={Features} />
+        <Redirect path="*" to={Path.DASHBOARD} />
+      </Switch>
+    </div>
   );
 };
