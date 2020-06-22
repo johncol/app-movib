@@ -1,5 +1,6 @@
 .catalog {
   width: 100vw;
+  min-height: 100vh;
   display: flex;
   overflow: scroll;
   scroll-snap-type: x mandatory;
