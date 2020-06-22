@@ -38,7 +38,7 @@ const movie = async (imdbId: string): Promise<Movie> => {
     return movieInCache;
   }
 
-  const response = await fetch(`${host}&i=${imdbId}`);
+  const response: Response = await fetch(`${host}&i=${imdbId}`);
   const movieResponse: MovieResponse = await response.json();
   console.debug(`Movie ${imdbId}:`, movieResponse);
 
@@ -53,6 +53,21 @@ const movie = async (imdbId: string): Promise<Movie> => {
   return movie;
 };
 
+const find = async (query: string): Promise<Movie> => {
+  const response: Response = await fetch(`${host}&t=${query}`);
+  const movieResponse: MovieResponse = await response.json();
+  console.debug(`Movie by query "${query}":`, movieResponse);
+
+  if (movieResponse.Response !== 'True') {
+    console.warn(movieResponse.Error);
+    throw new Error(movieResponse.Error);
+  }
+
+  const movie: Movie = movieResponse as Movie;
+  return movie;
+};
+
 export const omdb = {
   movie,
+  find,
 };
