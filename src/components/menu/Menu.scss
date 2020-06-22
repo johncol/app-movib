@@ -23,20 +23,21 @@
     width: 100vw;
     height: 100vh;
     background-color: $color-black;
-    z-index: 10;
+    z-index: -10;
     position: absolute;
     top: 0;
-    left: -100vw;
-    transition: left 0.3s ease-out;
-    transform-origin: center;
+    opacity: 0;
     display: flex;
     align-items: center;
+    transition: all 0.3s ease-out;
 
     ul {
       list-style: none;
       padding: 0;
       margin: 0;
       flex-grow: 1;
+      transform: translateY(-50%) scale(0.5);
+      transition: all 0.3s ease-out;
 
       a,
       a:visited {
@@ -61,7 +62,12 @@
     height: 100vh;
 
     .menu-options {
-      left: 0;
+      z-index: 10;
+      opacity: 1;
+
+      ul {
+        transform: translateY(0) scale(1);
+      }
     }
   }
 }
