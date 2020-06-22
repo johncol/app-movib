@@ -8,20 +8,22 @@ import './Menu.scss';
 export const Menu = (): ReactElement => {
   const [collapsed, setCollapsed] = useState(true);
 
+  const toggle = () => {
+    setCollapsed((collapsed) => !collapsed);
+  };
+
   return (
     <nav className={`menu ${collapsed && 'collapsed'}`}>
-      <button
-        onClick={() => setCollapsed((collapsed) => !collapsed)}
-        className="menu-button"
-        aria-label="Toggle Menu"
-      >
+      <button onClick={toggle} className="menu-button" aria-label="Toggle Menu">
         <MenuIcon collapsed={collapsed} />
       </button>
       <div className="menu-options">
         <ul>
           {options.map((action: MenuOption) => (
             <li key={action.link}>
-              <Link to={action.link}>{action.label}</Link>
+              <Link to={action.link} onClick={toggle}>
+                {action.label}
+              </Link>
             </li>
           ))}
         </ul>

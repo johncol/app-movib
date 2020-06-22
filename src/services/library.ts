@@ -14,7 +14,9 @@ interface UserMovies {
   watched: WatchedMovie[];
 }
 
-const movies = async (user: number): Promise<Movies> => {
+type Catalog = 'toWatch' | 'watched';
+
+const movies = async (user: number, catalog: Catalog): Promise<Movies> => {
   const response = await fetch(`http://localhost:4000/users/${user}/movies`, {
     headers: {
       'Content-Type': 'application/json',
@@ -28,13 +30,22 @@ const movies = async (user: number): Promise<Movies> => {
   }
 
   const [userMovies] = matchingUsersMovies;
-  const movies = userMovies.watched.map((movie: WatchedMovie) => {
+  const movies = (userMovies[catalog] as UserMovie[]).map((movie: UserMovie) => {
     return omdb.movie(movie.id);
   });
 
   return Promise.all(movies);
 };
 
+const moviesToWatch = (user: number): Promise<Movies> => {
+  return movies(user, 'toWatch');
+};
+
+const moviesWatched = async (user: number): Promise<Movies> => {
+  return movies(user, 'watched');
+};
+
 export const library = {
-  movies,
+  moviesToWatch,
+  moviesWatched,
 };

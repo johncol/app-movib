@@ -6,4 +6,5 @@ export enum Path {
   LIST_TO_WATCH = '/dashboard/to-watch',
   LIST_WATCHED = '/dashboard/watched',
   SEARCH = '/dashboard/search',
+  FEATURES = '/dashboard/features',
 }
