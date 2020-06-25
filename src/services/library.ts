@@ -41,6 +41,14 @@ const isMovieInWatchList = async (user: number, movieId: string): Promise<boolea
   return userMovies.toWatch.map(({ id }) => id).includes(movieId);
 };
 
+const isMovieInLists = async (user: number, movieId: string): Promise<boolean> => {
+  const userMovies: UserMovies = await JsonServer.fetchUserMovies(user);
+  return [
+    ...userMovies.toWatch.map(({ id }) => id),
+    ...userMovies.watched.map(({ id }) => id),
+  ].includes(movieId);
+};
+
 const toggleMovieInWatchList = async (
   user: number,
   movieId: string,
@@ -60,5 +68,6 @@ export const library = {
   addMovieToWatchList,
   removeMovieFromWatchList,
   isMovieInWatchList,
+  isMovieInLists,
   toggleMovieInWatchList,
 };

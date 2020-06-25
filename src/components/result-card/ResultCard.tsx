@@ -3,7 +3,7 @@ import { MdClose } from 'react-icons/md';
 
 import { Movie } from '../../services/omdb';
 import { MovieCard } from '../movie-card/MovieCard';
-import { ToggleInWatchList } from './ToggleInWatchList';
+import { AddMovieToWatchList } from './AddMovieToWatchList';
 import { ButtonIcon } from '../button-icon/ButtonIcon';
 
 import './ResultCard.scss';
@@ -31,7 +31,7 @@ export const ResultCard = (props: Props): ReactElement | null => {
 const ResultActions = ({ onGoBack, movie }: Props): ReactElement => {
   return (
     <div className="result-actions">
-      <ToggleInWatchList movie={movie} />
+      <AddMovieToWatchList movie={movie} />
       <ButtonIcon onClick={onGoBack}>
         <MdClose />
       </ButtonIcon>

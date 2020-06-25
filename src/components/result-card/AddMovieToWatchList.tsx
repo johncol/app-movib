@@ -12,16 +12,16 @@ interface Props {
   movie: Movie;
 }
 
-export const ToggleInWatchList = ({ movie }: Props): ReactElement => {
+export const AddMovieToWatchList = ({ movie }: Props): ReactElement => {
   const [loading, setLoading] = useState<boolean>(true);
   const [inList, setInList] = useState<boolean>(false);
   const user: User = useSessionUser();
 
   useEffect(() => {
-    const checkIfMovieInWatchList = (): void => {
+    const checkIfMovieInLists = (): void => {
       setLoading(true);
       library
-        .isMovieInWatchList(user.id, movie.imdbID)
+        .isMovieInLists(user.id, movie.imdbID)
         .then((inList: boolean) => {
           setInList(inList);
           setLoading(false);
@@ -29,7 +29,7 @@ export const ToggleInWatchList = ({ movie }: Props): ReactElement => {
         .catch(console.warn);
     };
 
-    checkIfMovieInWatchList();
+    checkIfMovieInLists();
   }, [movie.imdbID, user.id]);
 
   const toggleInList = () => {
