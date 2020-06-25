@@ -11,7 +11,7 @@ export const Logout = () => {
   useEffect(() => {
     session.clear();
     setLoggedOut(true);
-  }, []);
+  }, [session]);
 
   if (loggedOut) {
     return <Redirect to={Path.ROOT} />;

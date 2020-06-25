@@ -67,7 +67,7 @@ const find = async (query: string): Promise<Movie> => {
   return movie;
 };
 
-export const omdb = {
+export const OMDB = {
   movie,
   find,
 };

@@ -24,15 +24,30 @@
       margin: 0;
       cursor: pointer;
       color: inherit;
-      opacity: 0.7;
+      opacity: 1;
       transition: opacity 0.2s ease-in;
 
       &:not(:first-child) {
         margin-right: 0.5rem;
       }
 
-      &:hover {
+      &:hover:not(:disabled) {
         opacity: 0.9;
+      }
+
+      &:disabled {
+        cursor: default;
+      }
+
+      .spinner {
+        width: 40px;
+        height: 40px;
+        margin: 0;
+        transform: scale(0.3) translate(-2rem, 0rem);
+
+        div {
+          background-color: #e91e63;
+        }
       }
     }
   }

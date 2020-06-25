@@ -1,37 +1,12 @@
-import { omdb, Movies } from './omdb';
-
-interface UserMovie {
-  id: string;
-}
-
-interface WatchedMovie extends UserMovie {
-  score: number;
-}
-
-interface UserMovies {
-  userId: number;
-  toWatch: UserMovie[];
-  watched: WatchedMovie[];
-}
+import { OMDB, Movies } from './omdb';
+import { JsonServer, UserMovies, UserMovie } from './json-server';
 
 type Catalog = 'toWatch' | 'watched';
 
 const movies = async (user: number, catalog: Catalog): Promise<Movies> => {
-  const response = await fetch(`http://localhost:4000/users/${user}/movies`, {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  });
-  const matchingUsersMovies: UserMovies[] = await response.json();
-  console.log(`User ${user} movies response:`, matchingUsersMovies);
-
-  if (matchingUsersMovies.length !== 1) {
-    throw new Error(`Users movies length expected to be 1 but was ${matchingUsersMovies.length}`);
-  }
-
-  const [userMovies] = matchingUsersMovies;
+  const userMovies: UserMovies = await JsonServer.fetchUserMovies(user);
   const movies = (userMovies[catalog] as UserMovie[]).map((movie: UserMovie) => {
-    return omdb.movie(movie.id);
+    return OMDB.movie(movie.id);
   });
 
   return Promise.all(movies);
@@ -45,7 +20,45 @@ const moviesWatched = async (user: number): Promise<Movies> => {
   return movies(user, 'watched');
 };
 
+const addMovieToWatchList = async (user: number, movieId: string): Promise<any> => {
+  const userMovies: UserMovies = await JsonServer.fetchUserMovies(user);
+  const toWatch: UserMovie[] = userMovies.toWatch || [];
+  userMovies.toWatch = [...toWatch, { id: movieId }];
+
+  return JsonServer.updateUserMovies(userMovies);
+};
+
+const removeMovieFromWatchList = async (user: number, movieId: string): Promise<any> => {
+  const userMovies: UserMovies = await JsonServer.fetchUserMovies(user);
+  const toWatch: UserMovie[] = userMovies.toWatch || [];
+  userMovies.toWatch = toWatch.filter(({ id }) => id !== movieId);
+
+  return JsonServer.updateUserMovies(userMovies);
+};
+
+const isMovieInWatchList = async (user: number, movieId: string): Promise<boolean> => {
+  const userMovies: UserMovies = await JsonServer.fetchUserMovies(user);
+  return userMovies.toWatch.map(({ id }) => id).includes(movieId);
+};
+
+const toggleMovieInWatchList = async (
+  user: number,
+  movieId: string,
+  inList?: boolean
+): Promise<UserMovies> => {
+  if (inList === undefined) {
+    inList = await isMovieInWatchList(user, movieId);
+  }
+
+  const toggleMovie = inList ? library.removeMovieFromWatchList : library.addMovieToWatchList;
+  return toggleMovie(user, movieId);
+};
+
 export const library = {
   moviesToWatch,
   moviesWatched,
+  addMovieToWatchList,
+  removeMovieFromWatchList,
+  isMovieInWatchList,
+  toggleMovieInWatchList,
 };
