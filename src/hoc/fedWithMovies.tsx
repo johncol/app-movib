@@ -11,7 +11,7 @@ export const fedWithMovies = <P extends PropsWithMovies>(
   WrappedComponent: React.ComponentType<P>,
   fetchMovies: (userId: number) => Promise<Movies>
 ) => {
-  return (props: P): ReactElement => {
+  return (props: any): ReactElement => {
     const session: Session = useContext(SessionContext);
     const [movies, setMovies] = useState<Movies>([]);
 

@@ -4,8 +4,9 @@ import { MdPlaylistAddCheck, MdPlaylistAdd } from 'react-icons/md';
 import { library } from './../../services/library';
 import { Movie } from '../../services/omdb';
 import { User } from '../../services/auth';
-import { useSessionUser } from '../hooks/session-user';
+import { useSessionUser } from '../../hooks/session-user';
 import { Spinner } from '../spinner/Spinner';
+import { ButtonIcon } from '../button-icon/ButtonIcon';
 
 interface Props {
   movie: Movie;
@@ -43,12 +44,18 @@ export const ToggleInWatchList = ({ movie }: Props): ReactElement => {
   };
 
   return (
-    <button className="watch-list-action" onClick={toggleInList} disabled={loading || inList}>
+    <ButtonIcon onClick={toggleInList} disabled={loading || inList}>
       {loading ? (
         <Spinner />
       ) : (
-        <>{inList ? <MdPlaylistAddCheck title="Already in lists" /> : <MdPlaylistAdd />}</>
+        <>
+          {inList ? (
+            <MdPlaylistAddCheck title="Already in lists" />
+          ) : (
+            <MdPlaylistAdd title="Add to watch list" />
+          )}
+        </>
       )}
-    </button>
+    </ButtonIcon>
   );
 };

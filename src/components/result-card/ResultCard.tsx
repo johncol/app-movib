@@ -4,6 +4,7 @@ import { MdClose } from 'react-icons/md';
 import { Movie } from '../../services/omdb';
 import { MovieCard } from '../movie-card/MovieCard';
 import { ToggleInWatchList } from './ToggleInWatchList';
+import { ButtonIcon } from '../button-icon/ButtonIcon';
 
 import './ResultCard.scss';
 
@@ -31,9 +32,9 @@ const ResultActions = ({ onGoBack, movie }: Props): ReactElement => {
   return (
     <div className="result-actions">
       <ToggleInWatchList movie={movie} />
-      <button onClick={onGoBack}>
+      <ButtonIcon onClick={onGoBack}>
         <MdClose />
-      </button>
+      </ButtonIcon>
     </div>
   );
 };
