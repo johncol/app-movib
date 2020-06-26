@@ -1,5 +1,11 @@
 @import './../../styles/colors';
 
+@mixin delay-animation-for-nth-child($index) {
+  &:nth-child(#{$index}) a {
+    animation-delay: ($index - 1) * 100ms;
+  }
+}
+
 .search {
   h2 {
     color: $color-pink;
@@ -23,6 +29,7 @@
 
     .clear-query-icon {
       transition: color 0.1s ease-in;
+
       &:hover {
         cursor: pointer;
         color: white;
@@ -40,36 +47,45 @@
     }
 
     li {
-      margin: 0 0 1rem;
-      padding: 0.8rem 1rem 1rem;
-      background: linear-gradient(45deg, $color-black-darker, $color-black-darker);
-      background: $color-black-darker;
-      background-color: #333;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
-
-      color: white;
+      @for $index from 1 through 10 {
+        @include delay-animation-for-nth-child($index);
+      }
     }
 
     a {
-      &,
-      &:visited {
+      display: block;
+      margin: 0 0 1rem;
+      padding: 0.8rem 1rem 1rem;
+      font-size: 1rem;
+      color: white;
+      font-weight: 200;
+      background-color: #262626;
+      opacity: 0;
+      animation-name: fadeIn;
+      animation-timing-function: ease-in;
+      animation-duration: 0.5s;
+      animation-fill-mode: forwards;
+
+      h4 {
         color: $color-pink;
+        font-size: 1.1rem;
+        transition: all 0.1s ease-in;
+        font-weight: inherit;
       }
 
-      &:not([target='_blank']) {
-        font-size: 1.3rem;
-        font-weight: 200;
-        border-bottom: 1px solid transparent;
+      h4 {
+        color: $color-pink;
+        font-size: 1.1rem;
+        transition: all 0.1s ease-in;
+        font-weight: inherit;
+      }
 
-        &:hover {
-          text-decoration: none;
-          border-color: currentColor;
+      &:hover {
+        text-decoration: none;
+
+        h4 {
+          font-weight: 500;
         }
-      }
-
-      &[target='_blank'] {
-        color: inherit;
-        text-decoration: underline;
       }
     }
   }
@@ -79,5 +95,14 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }

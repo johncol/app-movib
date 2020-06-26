@@ -1,12 +1,12 @@
 import React, { ReactElement, useState, useEffect } from 'react';
 import { MdClose } from 'react-icons/md';
 
+import { library } from '../../services/library';
 import { Movie } from '../../services/library/movies';
 import { MovieCard } from '../movie-card/MovieCard';
 import { AddMovieToWatchList } from './AddMovieToWatchList';
 import { ButtonIcon } from '../button-icon/ButtonIcon';
-import { library } from '../../services/library';
-import { Path } from '../../constants/paths';
+import { Spinner } from '../spinner/Spinner';
 
 import './ResultCard.scss';
 
@@ -31,12 +31,12 @@ export const ResultCard = ({ match, history }: any): ReactElement => {
   }, [id]);
 
   if (loading) {
-    return <p>loading...</p>;
+    return <Spinner className="result-card-spinner" />;
   }
 
   return (
     <div className="result-card">
-      <ResultActions movie={movie} onGoBack={() => history.push(Path.SEARCH)} />
+      <ResultActions movie={movie} onGoBack={history.goBack} />
       <MovieCard movie={movie} />
     </div>
   );

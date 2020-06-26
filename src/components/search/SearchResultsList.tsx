@@ -20,12 +20,12 @@ export const SearchResultsList = ({ when, result }: Props): ReactElement | null 
       <ul>
         {result.movies.map((movie: MovieSummary) => (
           <li key={movie.id}>
-            <Link to={Path.SEARCH_RESULT(movie.id)}>{movie.title}</Link>
-            <br />
-            {movie.year} - {movie.type} -{' '}
-            <a href={movie.poster} target="_blank" rel="noopener noreferrer">
-              poster
-            </a>
+            <Link to={Path.SEARCH_RESULT(movie.id)}>
+              <h4>{movie.title}</h4>
+              <span>
+                {movie.year} {movie.type}
+              </span>
+            </Link>
           </li>
         ))}
       </ul>
