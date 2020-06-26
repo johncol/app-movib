@@ -1,15 +1,26 @@
-import React, { ReactElement, useState, ChangeEvent, KeyboardEvent, FormEvent } from 'react';
+import React, {
+  ReactElement,
+  useState,
+  ChangeEvent,
+  KeyboardEvent,
+  FormEvent,
+  useEffect,
+} from 'react';
 import Form from 'react-bootstrap/Form';
 import { AiOutlineSearch, AiOutlineCloseCircle } from 'react-icons/ai';
 
 interface Props {
   onSubmit: (query: string) => void;
+  query: string;
 }
 
-export const SearchForm = ({ onSubmit: submit }: Props): ReactElement => {
+export const SearchForm = ({ onSubmit: submit, query: currentQuery }: Props): ReactElement => {
   const [query, setQuery] = useState('');
-
   const isEmpty = query.trim().length === 0;
+
+  useEffect(() => {
+    setQuery(currentQuery);
+  }, [currentQuery]);
 
   const updateQuery = (event: ChangeEvent<HTMLInputElement>): void => {
     setQuery(event.target.value);

@@ -16,7 +16,7 @@ export const CatalogToWatch = () => {
   return (
     <div className="catalog-to-watch">
       <RemoveFromWatchList />
-      <CatalogToWatchComponent />;
+      <CatalogToWatchComponent />
     </div>
   );
 };

@@ -69,7 +69,7 @@ export const Login = () => {
 
             {!loading && formSubmitted && <Alert variant="warning">Wrong credentials</Alert>}
 
-            {loading && <Spinner />}
+            <Spinner when={loading} />
 
             <Button
               variant="primary"

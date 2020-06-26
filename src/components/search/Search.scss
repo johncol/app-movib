@@ -1,6 +1,8 @@
+@import './../../styles/colors';
+
 .search {
   form {
-    padding: 3rem 1.5rem;
+    padding: 3rem 1.5rem 0;
   }
 
   .form-group {
@@ -17,6 +19,37 @@
       &:hover {
         cursor: pointer;
         color: white;
+      }
+    }
+  }
+
+  .search-results-list {
+    margin: 0;
+
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 15px;
+    }
+
+    li {
+      margin: 0 0 1rem;
+      padding: 1rem;
+      background: linear-gradient(45deg, $color-black-darker, $color-black-darker);
+      background: $color-black-darker;
+
+      color: white;
+    }
+
+    a {
+      &,
+      &:visited {
+        color: $color-pink;
+      }
+
+      &[target='_blank'] {
+        color: inherit;
+        text-decoration: underline;
       }
     }
   }
