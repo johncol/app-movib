@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react';
 import { MdClose } from 'react-icons/md';
 
-import { Movie } from '../../services/omdb';
+import { Movie } from '../../services/library/movies';
 import { MovieCard } from '../movie-card/MovieCard';
 import { AddMovieToWatchList } from './AddMovieToWatchList';
 import { ButtonIcon } from '../button-icon/ButtonIcon';

@@ -1,4 +1,4 @@
-import { library } from '../../services/library';
+import { library } from '../../services/library/api';
 import { Catalog } from '../catalog/Catalog';
 import { fedWithMovies } from '../../hoc/fedWithMovies';
 

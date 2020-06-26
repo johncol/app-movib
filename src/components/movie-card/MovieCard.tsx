@@ -1,5 +1,5 @@
 import React from 'react';
-import { Movie } from '../../services/omdb';
+import { Movie } from '../../services/library/movies';
 
 import './MovieCard.scss';
 
@@ -20,14 +20,14 @@ export const MovieCard = ({ movie }: Props) => {
       </header>
       <main>
         <section>
-          <h2 className="title">{movie.Title}</h2>
+          <h2 className="title">{movie.title}</h2>
           <p className="additionalInfo">
-            {movie.Year} - {movie.Genre} - {movie.Awards}
+            {movie.year} - {movie.genre} - {movie.awards}
           </p>
         </section>
         <section className="plot">
           <h3>Summary</h3>
-          <p>{movie.Plot}</p>
+          <p>{movie.plot}</p>
         </section>
         <section className="actors">
           <Actors movie={movie} />
@@ -41,11 +41,12 @@ export const MovieCard = ({ movie }: Props) => {
 };
 
 const Poster = ({ movie }: Props) => {
-  return <img src={movie.Poster} alt={`${movie.Title} poster`} className="poster" />;
+  return <img src={movie.poster} alt={`${movie.title} poster`} className="poster" />;
 };
 
 const Actors = ({ movie }: Props) => {
-  const actors: Actor[] = movie.Actors.split(',')
+  const actors: Actor[] = movie.actors
+    .split(',')
     .map((actor: string) => actor.trim())
     .map((actor: string) => ({
       name: actor,
@@ -69,14 +70,10 @@ const Actors = ({ movie }: Props) => {
 const IMDBRating = ({ movie }: Props) => {
   return (
     <span className="imdb-rating">
-      <a
-        href={`https://www.imdb.com/title/${movie.imdbID}`}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
+      <a href={`https://www.imdb.com/title/${movie.id}`} target="_blank" rel="noopener noreferrer">
         <img src="/assets/icons/icon-imdb.png" alt="IMDB" />
       </a>
-      <span>{movie.imdbRating}</span>
+      <span>{movie.imdb?.rating}</span>
     </span>
   );
 };

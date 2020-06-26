@@ -1,19 +1,19 @@
 import React, { ReactElement, useContext, useState, useEffect } from 'react';
 import { Session, SessionContext } from '../context/session';
 
-import { Movies } from '../services/omdb';
+import { Movie } from '../services/library/movies';
 
 interface PropsWithMovies {
-  movies: Movies;
+  movies: Movie[];
 }
 
 export const fedWithMovies = <P extends PropsWithMovies>(
   WrappedComponent: React.ComponentType<P>,
-  fetchMovies: (userId: number) => Promise<Movies>
+  fetchMovies: (userId: number) => Promise<Movie[]>
 ) => {
   return (props: any): ReactElement => {
     const session: Session = useContext(SessionContext);
-    const [movies, setMovies] = useState<Movies>([]);
+    const [movies, setMovies] = useState<Movie[]>([]);
 
     useEffect(() => {
       if (session && session.user && movies.length === 0) {

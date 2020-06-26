@@ -1,13 +1,13 @@
 import React, { ReactElement } from 'react';
 
-import { Movies, Movie } from '../../services/omdb';
+import { Movie } from '../../services/library/movies';
 import { MovieCard } from '../movie-card/MovieCard';
 import { EmptyCatalog } from '../empty-catalog/EmptyCatalog';
 
 import './Catalog.scss';
 
 interface Props {
-  movies: Movies;
+  movies: Movie[];
 }
 
 export const Catalog = ({ movies }: Props): ReactElement => {
@@ -18,7 +18,7 @@ export const Catalog = ({ movies }: Props): ReactElement => {
   return (
     <div className="catalog">
       {movies.map((movie: Movie) => {
-        return <MovieCard key={movie.imdbID} movie={movie} />;
+        return <MovieCard key={movie.id} movie={movie} />;
       })}
     </div>
   );

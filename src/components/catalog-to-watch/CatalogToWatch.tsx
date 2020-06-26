@@ -1,6 +1,6 @@
 import React, { ReactElement, useState } from 'react';
 
-import { library } from '../../services/library';
+import { library } from '../../services/library/api';
 import { MdRemoveCircleOutline } from 'react-icons/md';
 
 import { fedWithMovies } from '../../hoc/fedWithMovies';

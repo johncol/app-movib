@@ -1,26 +1,27 @@
-import { OMDB, Movies } from './omdb';
-import { JsonServer, UserMovies, UserMovie } from './json-server';
+import { OMDB } from './../omdb/api';
+import { JsonServer, UserMovies, UserMovie } from './../json-server';
+import { Catalog } from './catalogs';
+import { mapper } from './mapper';
+import { Movie } from './movies';
 
-type Catalog = 'toWatch' | 'watched';
-
-const movies = async (user: number, catalog: Catalog): Promise<Movies> => {
+const movies = async (user: number, catalog: Catalog): Promise<Movie[]> => {
   const userMovies: UserMovies = await JsonServer.fetchUserMovies(user);
   const movies = (userMovies[catalog] as UserMovie[]).map((movie: UserMovie) => {
-    return OMDB.movie(movie.id);
+    return OMDB.movie(movie.id).then(mapper.toMovie);
   });
 
   return Promise.all(movies);
 };
 
-const moviesToWatch = (user: number): Promise<Movies> => {
+const moviesToWatch = (user: number): Promise<Movie[]> => {
   return movies(user, 'toWatch');
 };
 
-const moviesWatched = async (user: number): Promise<Movies> => {
+const moviesWatched = async (user: number): Promise<Movie[]> => {
   return movies(user, 'watched');
 };
 
-const addMovieToWatchList = async (user: number, movieId: string): Promise<any> => {
+const addMovieToWatchList = async (user: number, movieId: string): Promise<UserMovies> => {
   const userMovies: UserMovies = await JsonServer.fetchUserMovies(user);
   const toWatch: UserMovie[] = userMovies.toWatch || [];
   userMovies.toWatch = [...toWatch, { id: movieId }];
@@ -28,7 +29,7 @@ const addMovieToWatchList = async (user: number, movieId: string): Promise<any> 
   return JsonServer.updateUserMovies(userMovies);
 };
 
-const removeMovieFromWatchList = async (user: number, movieId: string): Promise<any> => {
+const removeMovieFromWatchList = async (user: number, movieId: string): Promise<UserMovies> => {
   const userMovies: UserMovies = await JsonServer.fetchUserMovies(user);
   const toWatch: UserMovie[] = userMovies.toWatch || [];
   userMovies.toWatch = toWatch.filter(({ id }) => id !== movieId);

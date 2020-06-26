@@ -1,10 +1,10 @@
-import { Movie } from './omdb';
+import { MovieResponse } from './omdb/movies';
 
-const save = (movie: Movie): void => {
+const save = (movie: MovieResponse): void => {
   localStorage.setItem(movie.imdbID, JSON.stringify(movie));
 };
 
-const get = (imdbId: string): Movie | null => {
+const get = (imdbId: string): MovieResponse | null => {
   const inCache = localStorage.getItem(imdbId);
   if (!inCache) {
     return null;

@@ -1,26 +1,22 @@
 import React, { ReactElement, useState } from 'react';
 
 import { SearchForm } from './SearchForm';
-import { OMDB, Movie } from '../../services/omdb';
-import { ResultCard } from '../result-card/ResultCard';
+import { OMDB } from '../../services/omdb/api';
+import { SearchResponse } from '../../services/omdb/search';
 
 import './Search.scss';
 
 export const Search = (): ReactElement => {
-  const [result, setResult] = useState<Movie | null>();
+  const [response, setResponse] = useState<SearchResponse>();
 
   const findMovie = (query: string): void => {
-    OMDB.find(query).then(setResult).catch(console.warn);
-  };
-
-  const clearSearch = (): void => {
-    setResult(null);
+    OMDB.search(query).then(setResponse).catch(console.warn);
   };
 
   return (
     <div className="search">
-      {!result && <SearchForm onSubmit={findMovie} />}
-      <ResultCard when={!!result} movie={result as Movie} onGoBack={clearSearch} />
+      <SearchForm onSubmit={findMovie} />
+      {response && <>{response.totalResults} were found</>}
     </div>
   );
 };

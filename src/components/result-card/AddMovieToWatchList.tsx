@@ -1,8 +1,8 @@
 import React, { ReactElement, useState, useEffect } from 'react';
 import { MdPlaylistAddCheck, MdPlaylistAdd } from 'react-icons/md';
 
-import { library } from './../../services/library';
-import { Movie } from '../../services/omdb';
+import { library } from './../../services/library/api';
+import { Movie } from '../../services/library/movies';
 import { User } from '../../services/auth';
 import { useSessionUser } from '../../hooks/session-user';
 import { Spinner } from '../spinner/Spinner';
@@ -21,7 +21,7 @@ export const AddMovieToWatchList = ({ movie }: Props): ReactElement => {
     const checkIfMovieInLists = (): void => {
       setLoading(true);
       library
-        .isMovieInLists(user.id, movie.imdbID)
+        .isMovieInLists(user.id, movie.id)
         .then((inList: boolean) => {
           setInList(inList);
           setLoading(false);
@@ -30,12 +30,12 @@ export const AddMovieToWatchList = ({ movie }: Props): ReactElement => {
     };
 
     checkIfMovieInLists();
-  }, [movie.imdbID, user.id]);
+  }, [movie.id, user.id]);
 
   const toggleInList = () => {
     setLoading(true);
     library
-      .toggleMovieInWatchList(user.id, movie.imdbID, inList)
+      .toggleMovieInWatchList(user.id, movie.id, inList)
       .then(() => {
         setInList((inList: boolean) => !inList);
         setLoading(false);
