@@ -1,8 +1,15 @@
 @import './../../styles/colors';
 
 .search {
+  h2 {
+    color: $color-pink;
+    text-align: right;
+    padding: 0.5rem 1.5rem;
+    font-weight: 200;
+  }
+
   form {
-    padding: 3rem 1.5rem 0;
+    padding: 0 1.5rem 0;
   }
 
   .form-group {
@@ -29,14 +36,16 @@
     ul {
       list-style: none;
       margin: 0;
-      padding: 15px;
+      padding: 1rem;
     }
 
     li {
       margin: 0 0 1rem;
-      padding: 1rem;
+      padding: 0.8rem 1rem 1rem;
       background: linear-gradient(45deg, $color-black-darker, $color-black-darker);
       background: $color-black-darker;
+      background-color: #333;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
 
       color: white;
     }
@@ -47,6 +56,17 @@
         color: $color-pink;
       }
 
+      &:not([target='_blank']) {
+        font-size: 1.3rem;
+        font-weight: 200;
+        border-bottom: 1px solid transparent;
+
+        &:hover {
+          text-decoration: none;
+          border-color: currentColor;
+        }
+      }
+
       &[target='_blank'] {
         color: inherit;
         text-decoration: underline;
@@ -55,6 +75,7 @@
   }
 
   .pagination {
+    padding: 0 1rem 1rem;
     display: flex;
     align-items: center;
     justify-content: space-between;

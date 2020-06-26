@@ -43,6 +43,7 @@ export const Search = (): ReactElement => {
 
   return (
     <div className="search">
+      <h2>Search</h2>
       <SearchForm onSubmit={triggerSearch} query={query} />
       <Spinner when={loading} />
       <SearchResultsList when={searchResult && !loading} result={searchResult} />

@@ -20,10 +20,10 @@ export const Pagination = ({ when, result, onNext, onPrevious }: Props): ReactEl
 
   return (
     <div className="pagination">
-      <Button variant="info" onClick={onPrevious} disabled={firstPage}>
+      <Button variant="primary" onClick={onPrevious} disabled={firstPage}>
         Previous
       </Button>
-      <Button variant="info" onClick={onNext} disabled={lastPage}>
+      <Button variant="primary" onClick={onNext} disabled={lastPage}>
         Next
       </Button>
     </div>
