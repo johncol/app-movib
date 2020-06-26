@@ -59,11 +59,11 @@ const toggleMovieInWatchList = async (
     inList = await isMovieInWatchList(user, movieId);
   }
 
-  const toggleMovie = inList ? library.removeMovieFromWatchList : library.addMovieToWatchList;
+  const toggleMovie = inList ? personal.removeMovieFromWatchList : personal.addMovieToWatchList;
   return toggleMovie(user, movieId);
 };
 
-export const library = {
+export const personal = {
   moviesToWatch,
   moviesWatched,
   addMovieToWatchList,

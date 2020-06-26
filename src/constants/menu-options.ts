@@ -2,7 +2,7 @@ import { Path } from './paths';
 
 export interface MenuOption {
   label: string;
-  link: Path;
+  link: string;
 }
 
 export const options: MenuOption[] = [

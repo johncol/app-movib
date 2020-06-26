@@ -1,32 +1,51 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useState, useEffect } from 'react';
 import { MdClose } from 'react-icons/md';
 
 import { Movie } from '../../services/library/movies';
 import { MovieCard } from '../movie-card/MovieCard';
 import { AddMovieToWatchList } from './AddMovieToWatchList';
 import { ButtonIcon } from '../button-icon/ButtonIcon';
+import { library } from '../../services/library';
+import { Path } from '../../constants/paths';
 
 import './ResultCard.scss';
 
-interface Props {
-  when?: boolean;
-  movie: Movie;
-  onGoBack: () => void;
-}
+export const ResultCard = ({ match, history }: any): ReactElement => {
+  const [loading, setLoading] = useState(true);
+  const [movie, setMovie] = useState<Movie>(null as any);
+  const { id } = match.params;
 
-export const ResultCard = (props: Props): ReactElement | null => {
-  const { when: visible } = props;
-  if (!visible) {
-    return null;
+  useEffect(() => {
+    const loadMovie = (): void => {
+      setLoading(true);
+      library.finder
+        .get(id)
+        .then((movie: Movie) => {
+          setMovie(movie);
+          setLoading(false);
+        })
+        .catch(console.warn);
+    };
+
+    loadMovie();
+  }, [id]);
+
+  if (loading) {
+    return <p>loading...</p>;
   }
 
   return (
     <div className="result-card">
-      <ResultActions {...props} />
-      <MovieCard movie={props.movie} />
+      <ResultActions movie={movie} onGoBack={() => history.push(Path.SEARCH)} />
+      <MovieCard movie={movie} />
     </div>
   );
 };
+
+interface Props {
+  onGoBack: () => void;
+  movie: Movie;
+}
 
 const ResultActions = ({ onGoBack, movie }: Props): ReactElement => {
   return (

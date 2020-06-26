@@ -1,5 +1,6 @@
 import { MovieResponse } from '../omdb/movies';
-import { Movie } from './movies';
+import { Movie, MovieSummary } from './movies';
+import { SearchItem } from '../omdb/search';
 
 const toMovie = (response: MovieResponse): Movie => {
   return {
@@ -27,6 +28,17 @@ const toMovie = (response: MovieResponse): Movie => {
   };
 };
 
+const toMovieSummary = (response: SearchItem): MovieSummary => {
+  return {
+    id: response.imdbID,
+    title: response.Title,
+    year: response.Year,
+    poster: response.Poster,
+    type: response.Type,
+  };
+};
+
 export const mapper = {
   toMovie,
+  toMovieSummary,
 };

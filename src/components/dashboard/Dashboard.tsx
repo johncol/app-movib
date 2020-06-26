@@ -8,6 +8,7 @@ import { Features } from '../features/Features';
 import { CatalogToWatch } from '../catalog-to-watch/CatalogToWatch';
 import { CatalogWatched } from '../catalog-watched/CatalogWatched';
 import { Search } from '../search/Search';
+import { ResultCard } from '../result-card/ResultCard';
 
 import './Dashboard.scss';
 
@@ -32,7 +33,8 @@ const DashboardRouting = (): ReactElement => {
         <Redirect exact path={Path.DASHBOARD} to={Path.LIST_TO_WATCH} />
         <Route path={Path.LIST_TO_WATCH} component={CatalogToWatch} />
         <Route path={Path.LIST_WATCHED} component={CatalogWatched} />
-        <Route path={Path.SEARCH} component={Search} />
+        <Route exact path={Path.SEARCH} component={Search} />
+        <Route exact path={Path.SEARCH_RESULT()} component={ResultCard} />
         <Route path={Path.FEATURES} component={Features} />
         <Redirect path="*" to={Path.DASHBOARD} />
       </Switch>

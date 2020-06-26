@@ -1,7 +1,7 @@
 import React, { ReactElement, useState, useEffect } from 'react';
 import { MdPlaylistAddCheck, MdPlaylistAdd } from 'react-icons/md';
 
-import { library } from './../../services/library/api';
+import { library } from './../../services/library';
 import { Movie } from '../../services/library/movies';
 import { User } from '../../services/auth';
 import { useSessionUser } from '../../hooks/session-user';
@@ -20,7 +20,7 @@ export const AddMovieToWatchList = ({ movie }: Props): ReactElement => {
   useEffect(() => {
     const checkIfMovieInLists = (): void => {
       setLoading(true);
-      library
+      library.personal
         .isMovieInLists(user.id, movie.id)
         .then((inList: boolean) => {
           setInList(inList);
@@ -34,7 +34,7 @@ export const AddMovieToWatchList = ({ movie }: Props): ReactElement => {
 
   const toggleInList = () => {
     setLoading(true);
-    library
+    library.personal
       .toggleMovieInWatchList(user.id, movie.id, inList)
       .then(() => {
         setInList((inList: boolean) => !inList);

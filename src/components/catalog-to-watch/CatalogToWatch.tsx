@@ -1,6 +1,6 @@
 import React, { ReactElement, useState } from 'react';
 
-import { library } from '../../services/library/api';
+import { library } from '../../services/library';
 import { MdRemoveCircleOutline } from 'react-icons/md';
 
 import { fedWithMovies } from '../../hoc/fedWithMovies';
@@ -21,7 +21,7 @@ export const CatalogToWatch = () => {
   );
 };
 
-const CatalogToWatchComponent = fedWithMovies(Catalog, library.moviesToWatch);
+const CatalogToWatchComponent = fedWithMovies(Catalog, library.personal.moviesToWatch);
 
 const RemoveFromWatchList = (): ReactElement => {
   const user: User = useSessionUser();
@@ -29,7 +29,7 @@ const RemoveFromWatchList = (): ReactElement => {
 
   const remove = () => {
     setLoading(true);
-    library
+    library.personal
       .removeMovieFromWatchList(user.id, 'XXX')
       .then(() => {
         setLoading(false);
