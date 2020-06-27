@@ -9,6 +9,8 @@ import React, {
 import Form from 'react-bootstrap/Form';
 import { AiOutlineSearch, AiOutlineCloseCircle } from 'react-icons/ai';
 
+import './SearchForm.scss';
+
 interface Props {
   onSubmit: (query: string) => void;
   query: string;
@@ -42,7 +44,7 @@ export const SearchForm = ({ onSubmit: submit, query: currentQuery }: Props): Re
   };
 
   return (
-    <Form autoComplete="off" onSubmit={findMovie}>
+    <Form autoComplete="off" onSubmit={findMovie} className="search-form">
       <Form.Group controlId="search">
         <Form.Label>
           {isEmpty ? (

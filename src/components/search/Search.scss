@@ -1,108 +1,10 @@
 @import './../../styles/colors';
 
-@mixin delay-animation-for-nth-child($index) {
-  &:nth-child(#{$index}) a {
-    animation-delay: ($index - 1) * 100ms;
-  }
-}
-
 .search {
   h2 {
     color: $color-pink;
     text-align: right;
     padding: 0.5rem 1.5rem;
     font-weight: 200;
-  }
-
-  form {
-    padding: 0 1.5rem 0;
-  }
-
-  .form-group {
-    position: relative;
-
-    label {
-      position: absolute;
-      right: 5px;
-      top: 0.5rem;
-    }
-
-    .clear-query-icon {
-      transition: color 0.1s ease-in;
-
-      &:hover {
-        cursor: pointer;
-        color: white;
-      }
-    }
-  }
-
-  .search-results-list {
-    margin: 0;
-
-    ul {
-      list-style: none;
-      margin: 0;
-      padding: 1rem;
-    }
-
-    li {
-      @for $index from 1 through 10 {
-        @include delay-animation-for-nth-child($index);
-      }
-    }
-
-    a {
-      display: block;
-      margin: 0 0 1rem;
-      padding: 0.8rem 1rem 1rem;
-      font-size: 1rem;
-      color: white;
-      font-weight: 200;
-      background-color: #262626;
-      opacity: 0;
-      animation-name: fadeIn;
-      animation-timing-function: ease-in;
-      animation-duration: 0.5s;
-      animation-fill-mode: forwards;
-
-      h4 {
-        color: $color-pink;
-        font-size: 1.1rem;
-        transition: all 0.1s ease-in;
-        font-weight: inherit;
-      }
-
-      h4 {
-        color: $color-pink;
-        font-size: 1.1rem;
-        transition: all 0.1s ease-in;
-        font-weight: inherit;
-      }
-
-      &:hover {
-        text-decoration: none;
-
-        h4 {
-          font-weight: 500;
-        }
-      }
-    }
-  }
-
-  .pagination {
-    padding: 0 1rem 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
   }
 }

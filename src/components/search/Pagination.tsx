@@ -3,6 +3,8 @@ import Button from 'react-bootstrap/Button';
 
 import { SearchResult } from '../../services/library/search';
 
+import './Pagination.scss';
+
 interface Props {
   when: boolean;
   result: SearchResult;
@@ -19,7 +21,7 @@ export const Pagination = ({ when, result, onNext, onPrevious }: Props): ReactEl
   const lastPage: boolean = result.currentPage === result.pages;
 
   return (
-    <div className="pagination">
+    <div className="search-pagination">
       <Button variant="primary" onClick={onPrevious} disabled={firstPage}>
         Previous
       </Button>

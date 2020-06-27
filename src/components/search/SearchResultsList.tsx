@@ -5,6 +5,8 @@ import { SearchResult } from '../../services/library/search';
 import { MovieSummary } from '../../services/library/movies';
 import { Path } from '../../constants/paths';
 
+import './SearchResultsList.scss';
+
 interface Props {
   when: boolean;
   result: SearchResult;
