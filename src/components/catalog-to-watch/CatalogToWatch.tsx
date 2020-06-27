@@ -11,6 +11,7 @@ import { User } from '../../services/auth';
 import { Spinner } from '../spinner/Spinner';
 
 import './CatalogToWatch.scss';
+import { urls } from '../../services/urls';
 
 export const CatalogToWatch = () => {
   return (
@@ -29,8 +30,9 @@ const RemoveFromWatchList = (): ReactElement => {
 
   const remove = () => {
     setLoading(true);
+    const movieId: string = urls.getMovieIdFromUrl();
     library.personal
-      .removeMovieFromWatchList(user.id, 'XXX')
+      .removeMovieFromWatchList(user.id, movieId)
       .then(() => {
         setLoading(false);
       })

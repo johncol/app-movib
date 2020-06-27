@@ -1,20 +1,30 @@
 import React from 'react';
+
 import { Movie } from '../../services/library/movies';
+import { IMDBRating } from './IMDBRating';
+import { Actors } from './Actors';
+import { useIntersect } from '../../hooks/use-intersect';
+import { urls } from '../../services/urls';
 
 import './MovieCard.scss';
+
+const VIEW_THRESHOLD: number = 0.75;
 
 interface Props {
   movie: Movie;
 }
 
-interface Actor {
-  name: string;
-  link: string;
-}
-
 export const MovieCard = ({ movie }: Props) => {
+  const [card, entry] = useIntersect({
+    threshold: VIEW_THRESHOLD,
+  });
+
+  if (entry.intersectionRatio > VIEW_THRESHOLD) {
+    urls.setMovieIdInUrl(movie);
+  }
+
   return (
-    <section className="movie-card">
+    <section className="movie-card" ref={card}>
       <header>
         <Poster movie={movie} />
       </header>
@@ -42,38 +52,4 @@ export const MovieCard = ({ movie }: Props) => {
 
 const Poster = ({ movie }: Props) => {
   return <img src={movie.poster} alt={`${movie.title} poster`} className="poster" />;
-};
-
-const Actors = ({ movie }: Props) => {
-  const actors: Actor[] = movie.actors
-    .split(',')
-    .map((actor: string) => actor.trim())
-    .map((actor: string) => ({
-      name: actor,
-      link: `https://www.imdb.com/find?q=${actor}`,
-    }));
-
-  return (
-    <p>
-      {actors.map((actor: Actor) => (
-        <React.Fragment key={actor.name}>
-          <a href={actor.link} target="_blank" rel="noopener noreferrer">
-            {actor.name}
-          </a>
-          ,&nbsp;
-        </React.Fragment>
-      ))}
-    </p>
-  );
-};
-
-const IMDBRating = ({ movie }: Props) => {
-  return (
-    <span className="imdb-rating">
-      <a href={`https://www.imdb.com/title/${movie.id}`} target="_blank" rel="noopener noreferrer">
-        <img src="/assets/icons/icon-imdb.png" alt="IMDB" />
-      </a>
-      <span>{movie.imdb?.rating}</span>
-    </span>
-  );
 };
