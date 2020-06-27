@@ -3,28 +3,16 @@ import React from 'react';
 import { Movie } from '../../services/library/movies';
 import { IMDBRating } from './IMDBRating';
 import { Actors } from './Actors';
-import { useIntersect } from '../../hooks/use-intersect';
-import { urls } from '../../services/urls';
 
 import './MovieCard.scss';
-
-const VIEW_THRESHOLD: number = 0.75;
 
 interface Props {
   movie: Movie;
 }
 
 export const MovieCard = ({ movie }: Props) => {
-  const [card, entry] = useIntersect({
-    threshold: VIEW_THRESHOLD,
-  });
-
-  if (entry.intersectionRatio > VIEW_THRESHOLD) {
-    urls.setMovieIdInUrl(movie);
-  }
-
   return (
-    <section className="movie-card" ref={card}>
+    <section className="movie-card">
       <header>
         <Poster movie={movie} />
       </header>

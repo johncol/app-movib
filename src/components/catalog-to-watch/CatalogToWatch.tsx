@@ -1,52 +1,44 @@
-import React, { ReactElement, useState } from 'react';
+import React, { ReactElement, useState, useEffect } from 'react';
 
 import { library } from '../../services/library';
-import { MdRemoveCircleOutline } from 'react-icons/md';
-
-import { fedWithMovies } from '../../hoc/fedWithMovies';
 import { Catalog } from '../catalog/Catalog';
-import { ButtonIcon } from '../button-icon/ButtonIcon';
+import { RemoveFromWatchList } from './RemoveFromWatchList';
 import { useSessionUser } from '../../hooks/session-user';
+import { Movie } from '../../services/library/movies';
 import { User } from '../../services/auth';
-import { Spinner } from '../spinner/Spinner';
 
 import './CatalogToWatch.scss';
-import { urls } from '../../services/urls';
 
-export const CatalogToWatch = () => {
-  return (
-    <div className="catalog-to-watch">
-      <RemoveFromWatchList />
-      <CatalogToWatchComponent />
-    </div>
-  );
-};
-
-const CatalogToWatchComponent = fedWithMovies(Catalog, library.personal.moviesToWatch);
-
-const RemoveFromWatchList = (): ReactElement => {
+export const CatalogToWatch = (): ReactElement => {
   const user: User = useSessionUser();
+  const [movies, setMovies] = useState<Movie[]>([]);
   const [loading, setLoading] = useState(false);
 
-  const remove = () => {
+  const removeMovie = (movieId: string): void => {
     setLoading(true);
-    const movieId: string = urls.getMovieIdFromUrl();
     library.personal
       .removeMovieFromWatchList(user.id, movieId)
       .then(() => {
         setLoading(false);
+        setMovies((movies: Movie[]) => {
+          return movies.filter((movie: Movie) => movie.id !== movieId);
+        });
       })
       .catch(console.warn);
   };
 
+  useEffect(() => {
+    const loadMovies = (): void => {
+      library.personal.moviesToWatch(user.id).then(setMovies).catch(console.warn);
+    };
+
+    loadMovies();
+  }, [user.id]);
+
   return (
-    <ButtonIcon
-      className="remove-from-list-btn"
-      title="Remove from watch list"
-      onClick={remove}
-      disabled={loading}
-    >
-      {loading ? <Spinner /> : <MdRemoveCircleOutline />}
-    </ButtonIcon>
+    <div className="catalog-to-watch">
+      <RemoveFromWatchList loading={loading} onRemove={removeMovie} />
+      <Catalog movies={movies} />
+    </div>
   );
 };

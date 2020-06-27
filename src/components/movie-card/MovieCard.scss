@@ -2,7 +2,8 @@
 
 .movie-card {
   width: 100vw;
-  min-height: 100vh;
+  height: 100vh;
+  overflow-y: scroll;
   scroll-snap-align: center;
   display: flex;
   flex-direction: column;
