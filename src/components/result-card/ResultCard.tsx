@@ -36,8 +36,10 @@ export const ResultCard = ({ match, history }: any): ReactElement => {
 
   return (
     <div className="result-card">
-      <ResultActions movie={movie} onGoBack={history.goBack} />
-      <MovieCard movie={movie} />
+      <MovieCard
+        movie={movie}
+        footerIcons={<ResultActions movie={movie} onGoBack={history.goBack} />}
+      />
     </div>
   );
 };
@@ -51,9 +53,9 @@ const ResultActions = ({ onGoBack, movie }: Props): ReactElement => {
   return (
     <div className="result-actions">
       <AddMovieToWatchList movie={movie} />
-      <ButtonIcon onClick={onGoBack}>
-        <MdClose />
-      </ButtonIcon>
+      <button onClick={onGoBack} className="bordered-cta">
+        back
+      </button>
     </div>
   );
 };

@@ -8,13 +8,16 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  font-size: 0.9rem;
 
   header {
     max-height: 120vw;
+    overflow: hidden;
 
     .poster {
       width: 100vw;
       min-width: 20rem;
+      filter: brightness(0.7);
     }
   }
 
@@ -25,7 +28,7 @@
 
     .title {
       margin: 0;
-      padding: 5rem 0 0.5rem;
+      padding: 5rem 0 0;
       color: white;
       font-weight: 400;
       font-size: 2.5rem;
@@ -37,19 +40,10 @@
 
     .plot {
       h3 {
-        font-size: 1.2rem;
+        font-variant: small-caps;
+        font-size: 1.1rem;
         font-weight: 400;
         color: white;
-      }
-    }
-
-    .actors {
-      font-size: 0.9rem;
-      font-style: italic;
-
-      a,
-      a:visited {
-        color: inherit;
       }
     }
   }
@@ -65,21 +59,9 @@
     flex-grow: 1;
     background-color: $color-black;
 
-    .imdb-rating {
-      height: 2rem;
-      display: flex;
-      align-items: center;
-      font-weight: 700;
-
-      a,
-      a:visited {
-        color: inherit;
-        margin-right: 0.5rem;
-
-        img {
-          max-height: 2rem;
-        }
-      }
+    & > *:not(:last-child),
+    & > * > *:not(:last-child) {
+      margin-right: 10px;
     }
   }
 

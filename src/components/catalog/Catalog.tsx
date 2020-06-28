@@ -10,9 +10,10 @@ import './Catalog.scss';
 
 interface Props {
   movies: Movie[];
+  footerIcons?: ReactElement;
 }
 
-export const Catalog = ({ movies }: Props): ReactElement => {
+export const Catalog = ({ movies, footerIcons }: Props): ReactElement => {
   if (movies.length === 0) {
     return <EmptyCatalog />;
   }
@@ -20,7 +21,7 @@ export const Catalog = ({ movies }: Props): ReactElement => {
   return (
     <div className="catalog">
       {movies.map((movie: Movie) => (
-        <SyncedWithUrl key={movie.id} movie={movie} />
+        <SyncedWithUrl key={movie.id} movie={movie} footerIcons={footerIcons} />
       ))}
     </div>
   );
@@ -28,7 +29,13 @@ export const Catalog = ({ movies }: Props): ReactElement => {
 
 const VIEW_THRESHOLD: number = 0.5;
 
-const SyncedWithUrl = ({ movie }: { movie: Movie }): ReactElement => {
+const SyncedWithUrl = ({
+  movie,
+  footerIcons,
+}: {
+  movie: Movie;
+  footerIcons?: ReactElement;
+}): ReactElement => {
   const [card, entry] = useIntersect({
     threshold: VIEW_THRESHOLD,
   });
@@ -40,7 +47,7 @@ const SyncedWithUrl = ({ movie }: { movie: Movie }): ReactElement => {
 
   return (
     <div className={`card-wrapper ${visible ? 'visible' : ''}`} ref={card}>
-      <MovieCard key={movie.id} movie={movie} />
+      <MovieCard key={movie.id} movie={movie} footerIcons={footerIcons} />
     </div>
   );
 };

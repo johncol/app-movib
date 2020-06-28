@@ -1,0 +1,31 @@
+@import './colors';
+
+.bordered-cta {
+  display: inline-block;
+  color: $color-pink;
+  border-radius: 3px;
+  border: 1px solid currentColor;
+  padding: 7px 5px 8px;
+  line-height: 1;
+  font-variant: small-caps;
+  opacity: 0.7;
+  transition: all 0.2s ease-in;
+  background-color: transparent;
+  white-space: nowrap;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 1;
+    text-decoration: none;
+    color: $color-pink;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: default;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}

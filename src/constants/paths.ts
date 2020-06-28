@@ -8,6 +8,7 @@ export const Path = {
   LIST_WATCHED: '/dashboard/watched',
   ITEM_WATCHED: (id: string) => `/dashboard/watched/${id}`,
   SEARCH: '/dashboard/search',
+  SETTINGS: '/dashboard/settings',
   SEARCH_PARAM: (query: string) => `/dashboard/search?query=${query}`,
   SEARCH_RESULT: (id: string = ':id') => `/dashboard/search/${id}`,
   FEATURES: '/dashboard/features',

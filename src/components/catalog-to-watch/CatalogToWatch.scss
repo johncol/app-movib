@@ -1,14 +1,5 @@
 .catalog-to-watch {
-  .remove-from-list-btn {
-    position: absolute;
-    right: 0.5rem;
-    top: 0.5rem;
-    font-size: 1.5rem;
-    line-height: 1;
-    color: #e91e63;
-
-    .spinner {
-      transform: scale(0.3) translate(0rem, -2rem);
-    }
+  .actions {
+    margin-left: auto;
   }
 }

@@ -1,0 +1,50 @@
+@import './../../styles/colors';
+
+.rater {
+  z-index: 100;
+  height: 100vh;
+  width: 100vw;
+  background-color: $color-black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  position: absolute;
+  left: 0;
+  bottom: 0rem;
+  overflow: hidden;
+  transition: all 0.3s ease-out;
+  transform: translateY(50%) scale(0);
+  opacity: 0;
+
+  &.visible {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+
+  .react-rater {
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+
+    .react-rater-star {
+      font-size: 2rem;
+      transition: color 0.1s ease-in;
+
+      color: $color-black-lighter;
+
+      &.is-active {
+        color: $color-pink;
+      }
+
+      &.will-be-active {
+        color: rgba($color-pink, 0.7);
+      }
+    }
+  }
+
+  button {
+    position: absolute;
+    top: calc(50% + 3rem);
+  }
+}

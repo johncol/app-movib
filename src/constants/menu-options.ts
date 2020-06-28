@@ -19,6 +19,10 @@ export const options: MenuOption[] = [
     link: Path.SEARCH,
   },
   {
+    label: 'Settings',
+    link: Path.SETTINGS,
+  },
+  {
     label: 'Logout',
     link: Path.LOGOUT,
   },

@@ -6,25 +6,34 @@ import { RemoveFromWatchList } from './RemoveFromWatchList';
 import { useSessionUser } from '../../hooks/session-user';
 import { Movie } from '../../services/library/movies';
 import { User } from '../../services/auth';
+import { MarkAsWatched } from './MarkAsWatched';
+import { Rater } from '../rater/Rater';
 
 import './CatalogToWatch.scss';
 
 export const CatalogToWatch = (): ReactElement => {
   const user: User = useSessionUser();
   const [movies, setMovies] = useState<Movie[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [raterVisible, setRaterVisible] = useState(false);
 
   const removeMovie = (movieId: string): void => {
-    setLoading(true);
     library.personal
       .removeMovieFromWatchList(user.id, movieId)
       .then(() => {
-        setLoading(false);
         setMovies((movies: Movie[]) => {
           return movies.filter((movie: Movie) => movie.id !== movieId);
         });
       })
       .catch(console.warn);
+  };
+
+  const showRater = (movieId: string): void => {
+    setRaterVisible(true);
+  };
+
+  const setRating = (rating: number): void => {
+    setRaterVisible(false);
+    console.log('Rating set to ', rating);
   };
 
   useEffect(() => {
@@ -37,8 +46,16 @@ export const CatalogToWatch = (): ReactElement => {
 
   return (
     <div className="catalog-to-watch">
-      <RemoveFromWatchList loading={loading} onRemove={removeMovie} />
-      <Catalog movies={movies} />
+      <Catalog
+        movies={movies}
+        footerIcons={
+          <div className="actions">
+            <MarkAsWatched onClick={showRater} />
+            <RemoveFromWatchList onClick={removeMovie} />
+          </div>
+        }
+      />
+      <Rater visible={raterVisible} onRated={setRating} />
     </div>
   );
 };

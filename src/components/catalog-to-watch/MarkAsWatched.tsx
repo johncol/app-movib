@@ -6,15 +6,15 @@ interface Props {
   onClick: (movieId: string) => void;
 }
 
-export const RemoveFromWatchList = ({ onClick }: Props): ReactElement => {
-  const remove = (): void => {
+export const MarkAsWatched = ({ onClick }: Props): ReactElement => {
+  const markAsWatched = (): void => {
     const movieId: string = urls.getMovieIdFromUrl();
     onClick(movieId);
   };
 
   return (
-    <button className="bordered-cta" title="Remove from watch list" onClick={remove}>
-      Remove
+    <button className="bordered-cta" onClick={markAsWatched}>
+      Mark as Watched
     </button>
   );
 };

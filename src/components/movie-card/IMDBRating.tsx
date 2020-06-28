@@ -2,6 +2,8 @@ import React from 'react';
 
 import { Movie } from '../../services/library/movies';
 
+import './IMDBRating.scss';
+
 interface Props {
   movie: Movie;
 }
@@ -12,7 +14,7 @@ export const IMDBRating = ({ movie }: Props) => {
       <a href={`https://www.imdb.com/title/${movie.id}`} target="_blank" rel="noopener noreferrer">
         <img src="/assets/icons/icon-imdb.png" alt="IMDB" />
       </a>
-      <span>{movie.imdb?.rating}</span>
+      {/* <span>{movie.imdb?.rating}</span> */}
     </span>
   );
 };

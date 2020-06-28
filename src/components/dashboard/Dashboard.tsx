@@ -36,6 +36,7 @@ const DashboardRouting = (): ReactElement => {
         <Route exact path={Path.SEARCH} component={Search} />
         <Route exact path={Path.SEARCH_RESULT()} component={ResultCard} />
         <Route path={Path.FEATURES} component={Features} />
+        <Route path={Path.SETTINGS} component={() => <p>Settings..</p>} />
         <Redirect path="*" to={Path.DASHBOARD} />
       </Switch>
     </div>

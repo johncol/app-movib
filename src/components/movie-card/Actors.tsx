@@ -1,6 +1,8 @@
 import React from 'react';
 import { Movie } from '../../services/library/movies';
 
+import './Actors.scss';
+
 interface Props {
   movie: Movie;
 }

@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 import { MenuIcon } from './menu-icon/MenuIcon';
 import { options, MenuOption } from '../../constants/menu-options';
+
 import './Menu.scss';
 
 export const Menu = (): ReactElement => {

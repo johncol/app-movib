@@ -1,17 +1,19 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 
 import { Movie } from '../../services/library/movies';
 import { IMDBRating } from './IMDBRating';
 import { Actors } from './Actors';
 
 import './MovieCard.scss';
+import { WatchTrailer } from './WatchTrailer';
 
 interface Props {
   movie: Movie;
   className?: string;
+  footerIcons?: ReactElement;
 }
 
-export const MovieCard = ({ movie, className = '' }: Props) => {
+export const MovieCard = ({ movie, className = '', footerIcons }: Props): ReactElement => {
   return (
     <section className={`movie-card ${className}`}>
       <header>
@@ -21,7 +23,7 @@ export const MovieCard = ({ movie, className = '' }: Props) => {
         <section>
           <h2 className="title">{movie.title}</h2>
           <p className="additionalInfo">
-            {movie.year} - {movie.genre} - {movie.awards}
+            {movie.year} - {movie.genre}
           </p>
         </section>
         <section className="plot">
@@ -34,11 +36,13 @@ export const MovieCard = ({ movie, className = '' }: Props) => {
       </main>
       <footer>
         <IMDBRating movie={movie} />
+        <WatchTrailer movie={movie} />
+        {footerIcons}
       </footer>
     </section>
   );
 };
 
-const Poster = ({ movie }: Props) => {
+const Poster = ({ movie }: Props): ReactElement => {
   return <img src={movie.poster} alt={`${movie.title} poster`} className="poster" />;
 };
