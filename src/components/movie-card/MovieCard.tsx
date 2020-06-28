@@ -8,11 +8,12 @@ import './MovieCard.scss';
 
 interface Props {
   movie: Movie;
+  className?: string;
 }
 
-export const MovieCard = ({ movie }: Props) => {
+export const MovieCard = ({ movie, className = '' }: Props) => {
   return (
-    <section className="movie-card">
+    <section className={`movie-card ${className}`}>
       <header>
         <Poster movie={movie} />
       </header>

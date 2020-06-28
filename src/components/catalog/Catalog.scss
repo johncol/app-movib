@@ -4,4 +4,12 @@
   display: flex;
   overflow: scroll;
   scroll-snap-type: x mandatory;
+
+  .card-wrapper {
+    transition: all 0.3s ease-out;
+
+    &:not(.visible) {
+      opacity: 0.2;
+    }
+  }
 }

@@ -26,19 +26,20 @@ export const Catalog = ({ movies }: Props): ReactElement => {
   );
 };
 
-const VIEW_THRESHOLD: number = 0.75;
+const VIEW_THRESHOLD: number = 0.5;
 
 const SyncedWithUrl = ({ movie }: { movie: Movie }): ReactElement => {
   const [card, entry] = useIntersect({
     threshold: VIEW_THRESHOLD,
   });
 
-  if (entry.intersectionRatio > VIEW_THRESHOLD) {
+  const visible: boolean = entry.intersectionRatio > VIEW_THRESHOLD;
+  if (visible) {
     urls.setMovieIdInUrl(movie);
   }
 
   return (
-    <div className="card-wrapper" ref={card}>
+    <div className={`card-wrapper ${visible ? 'visible' : ''}`} ref={card}>
       <MovieCard key={movie.id} movie={movie} />
     </div>
   );
