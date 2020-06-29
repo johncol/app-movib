@@ -1,11 +1,9 @@
 import React, { ReactElement, useState, useEffect } from 'react';
-import { MdClose } from 'react-icons/md';
 
 import { library } from '../../services/library';
 import { Movie } from '../../services/library/movies';
 import { MovieCard } from '../movie-card/MovieCard';
 import { AddMovieToWatchList } from './AddMovieToWatchList';
-import { ButtonIcon } from '../button-icon/ButtonIcon';
 import { Spinner } from '../spinner/Spinner';
 
 import './ResultCard.scss';

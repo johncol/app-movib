@@ -8,12 +8,7 @@ export interface Session {
 }
 
 export const SessionContextDefault: Session = {
-  user: {
-    id: 1,
-    email: 'john.19col@gmail.com',
-    name: 'John',
-    password: '',
-  },
+  user: null,
   save(user: User): void {
     this.user = user;
   },

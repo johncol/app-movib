@@ -1,7 +1,8 @@
 export const Path = {
   ROOT: '/',
-  LOGIN: '/login',
-  LOGOUT: '/logout',
+  LOGIN: '/auth/login',
+  LOGGED: '/auth/logged',
+  LOGOUT: '/auth/logout',
   DASHBOARD: '/dashboard',
   LIST_TO_WATCH: '/dashboard/to-watch',
   ITEM_TO_WATCH: (id: string) => `/dashboard/to-watch/${id}`,

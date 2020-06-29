@@ -1,0 +1,10 @@
+.logged {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
+
+  .logo {
+    margin-bottom: 2rem;
+  }
+}

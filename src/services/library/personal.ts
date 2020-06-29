@@ -7,7 +7,8 @@ import { MovieResponse } from '../omdb/movies';
 
 const movies = async (user: number, catalog: Catalog): Promise<Movie[]> => {
   const userMovies: UserMovies = await JsonServer.fetchUserMovies(user);
-  const movies = (userMovies[catalog] as UserMovie[]).map((movie: UserMovie) => {
+  const catalogMovies: UserMovie[] = (userMovies[catalog] as UserMovie[]) || [];
+  const movies = catalogMovies.map((movie: UserMovie) => {
     return OMDB.movie(movie.id).then(mapper.toMovie);
   });
 
@@ -19,7 +20,7 @@ const moviesToWatch = (user: number): Promise<Movie[]> => {
 };
 
 const moviesWatched = async (user: number): Promise<WatchedMovie[]> => {
-  const { watched }: UserMovies = await JsonServer.fetchUserMovies(user);
+  const { watched = [] }: UserMovies = await JsonServer.fetchUserMovies(user);
 
   const movies = watched.map(async (userWatchedMovie: UserWatchedMovie) => {
     const response: MovieResponse = await OMDB.movie(userWatchedMovie.id);

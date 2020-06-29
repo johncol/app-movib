@@ -6,6 +6,8 @@ import { Logout } from './logout/Logout';
 import { Dashboard } from './dashboard/Dashboard';
 import { Path } from '../constants/paths';
 import { SessionContext, SessionContextDefault } from '../context/session';
+import { Logged } from './login/Logged';
+import { HugeMessage } from './huge-message/HugeMessage';
 
 export const App = (): ReactElement => {
   return (
@@ -23,10 +25,11 @@ const RootRouting = (): ReactElement => {
   return (
     <Switch>
       <Redirect exact path={Path.ROOT} to={Path.LOGIN} />
-      <Route exact path={Path.LOGIN} component={Login} />
-      <Route exact path={Path.LOGOUT} component={Logout} />
+      <Route path={Path.LOGGED} component={Logged} />
+      <Route path={Path.LOGIN} component={Login} />
+      <Route path={Path.LOGOUT} component={Logout} />
       <Route path={Path.DASHBOARD} component={Dashboard} />
-      <Redirect path="*" to={Path.ROOT} />
+      <Route path="*" component={() => <HugeMessage threeWordsMessage="Page not found" />} />
     </Switch>
   );
 };

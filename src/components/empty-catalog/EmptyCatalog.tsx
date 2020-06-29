@@ -1,15 +1,6 @@
 import React, { ReactElement } from 'react';
-
-import './EmptyCatalog.scss';
+import { HugeMessage } from '../huge-message/HugeMessage';
 
 export const EmptyCatalog = (): ReactElement => {
-  return (
-    <div className="empty-catalog">
-      <p className="empty-catalog-message">
-        <span>No</span>
-        <strong>movies</strong>
-        <span>here</span>
-      </p>
-    </div>
-  );
+  return <HugeMessage threeWordsMessage="No movies here" />;
 };
