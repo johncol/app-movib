@@ -1,19 +1,21 @@
 import React, { ReactElement } from 'react';
 
+import { MovieToReactElement } from '../../types/MovieToReactElement';
 import { Movie } from '../../services/library/movies';
 import { IMDBRating } from './IMDBRating';
 import { Actors } from './Actors';
+import { WatchTrailer } from './WatchTrailer';
 
 import './MovieCard.scss';
-import { WatchTrailer } from './WatchTrailer';
 
 interface Props {
   movie: Movie;
   className?: string;
-  footerIcons?: ReactElement;
+  footerIcons?: ReactElement | MovieToReactElement;
 }
 
-export const MovieCard = ({ movie, className = '', footerIcons }: Props): ReactElement => {
+export const MovieCard = (props: Props): ReactElement => {
+  const { movie, className = '' } = props;
   return (
     <section className={`movie-card ${className}`}>
       <header>
@@ -37,7 +39,7 @@ export const MovieCard = ({ movie, className = '', footerIcons }: Props): ReactE
       <footer>
         <IMDBRating movie={movie} />
         <WatchTrailer movie={movie} />
-        {footerIcons}
+        <AdditionalIcons {...props} />
       </footer>
     </section>
   );
@@ -45,4 +47,16 @@ export const MovieCard = ({ movie, className = '', footerIcons }: Props): ReactE
 
 const Poster = ({ movie }: Props): ReactElement => {
   return <img src={movie.poster} alt={`${movie.title} poster`} className="poster" />;
+};
+
+const AdditionalIcons = ({ footerIcons, movie }: Props): ReactElement | null => {
+  if (typeof footerIcons === 'function') {
+    return footerIcons(movie);
+  }
+
+  if (!footerIcons) {
+    return null;
+  }
+
+  return footerIcons;
 };

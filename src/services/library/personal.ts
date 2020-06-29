@@ -1,5 +1,5 @@
 import { OMDB } from './../omdb/api';
-import { JsonServer, UserMovies, UserMovie } from './../json-server';
+import { JsonServer, UserMovies, UserMovie, WatchedMovie } from './../json-server';
 import { Catalog } from './catalogs';
 import { mapper } from './mapper';
 import { Movie } from './movies';
@@ -63,6 +63,28 @@ const toggleMovieInWatchList = async (
   return toggleMovie(user, movieId);
 };
 
+const fromWatchListToWatched = async (
+  user: number,
+  movieId: string,
+  score: number
+): Promise<UserMovies> => {
+  const userMovies: UserMovies = await JsonServer.fetchUserMovies(user);
+  const { toWatch, watched } = userMovies;
+
+  const movie: UserMovie | undefined = toWatch.find(({ id }) => id === movieId);
+  if (movie === undefined) {
+    throw new Error(`Movie ${movieId} not found in watch list`);
+  }
+  toWatch.splice(toWatch.indexOf(movie), 1);
+
+  watched.push({
+    id: movie.id,
+    score,
+  });
+
+  return JsonServer.updateUserMovies(userMovies);
+};
+
 export const personal = {
   moviesToWatch,
   moviesWatched,
@@ -71,4 +93,5 @@ export const personal = {
   isMovieInWatchList,
   isMovieInLists,
   toggleMovieInWatchList,
+  fromWatchListToWatched,
 };

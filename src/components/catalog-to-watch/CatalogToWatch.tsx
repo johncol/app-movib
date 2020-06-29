@@ -1,9 +1,9 @@
 import React, { ReactElement, useState, useEffect } from 'react';
 
 import { library } from '../../services/library';
+import { useSessionUser } from '../../hooks/session-user';
 import { Catalog } from '../catalog/Catalog';
 import { RemoveFromWatchList } from './RemoveFromWatchList';
-import { useSessionUser } from '../../hooks/session-user';
 import { Movie } from '../../services/library/movies';
 import { User } from '../../services/auth';
 import { MarkAsWatched } from './MarkAsWatched';
@@ -16,24 +16,30 @@ export const CatalogToWatch = (): ReactElement => {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [raterVisible, setRaterVisible] = useState(false);
 
+  const showRater = (): void => setRaterVisible(true);
+  const hideRater = (): void => setRaterVisible(false);
+
+  const filterOutMovie = (movieId: string): void => {
+    setMovies((movies: Movie[]) => {
+      return movies.filter((movie: Movie) => movie.id !== movieId);
+    });
+  };
+
   const removeMovie = (movieId: string): void => {
     library.personal
       .removeMovieFromWatchList(user.id, movieId)
-      .then(() => {
-        setMovies((movies: Movie[]) => {
-          return movies.filter((movie: Movie) => movie.id !== movieId);
-        });
-      })
+      .then(() => filterOutMovie(movieId))
       .catch(console.warn);
   };
 
-  const showRater = (movieId: string): void => {
-    setRaterVisible(true);
-  };
-
-  const setRating = (rating: number): void => {
-    setRaterVisible(false);
-    console.log('Rating set to ', rating);
+  const setRating = (movieId: string, rating: number): void => {
+    library.personal
+      .fromWatchListToWatched(user.id, movieId, rating)
+      .then(() => {
+        hideRater();
+        filterOutMovie(movieId);
+      })
+      .catch(console.warn);
   };
 
   useEffect(() => {
@@ -55,7 +61,7 @@ export const CatalogToWatch = (): ReactElement => {
           </div>
         }
       />
-      <Rater visible={raterVisible} onRated={setRating} />
+      <Rater visible={raterVisible} onConfirm={setRating} onCancel={hideRater} />
     </div>
   );
 };

@@ -43,7 +43,15 @@
     }
   }
 
-  button {
+  .close-button {
+    position: absolute;
+    top: 0;
+    left: 5px;
+    font-size: 1.5rem;
+    color: $color-pink;
+  }
+
+  .confirm-button {
     position: absolute;
     top: calc(50% + 3rem);
   }

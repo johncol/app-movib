@@ -14,6 +14,10 @@
   white-space: nowrap;
   cursor: pointer;
 
+  &--no-activatable {
+    cursor: default;
+  }
+
   &:hover {
     opacity: 1;
     text-decoration: none;
