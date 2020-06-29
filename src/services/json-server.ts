@@ -2,14 +2,14 @@ export interface UserMovie {
   id: string;
 }
 
-export interface WatchedMovie extends UserMovie {
+export interface UserWatchedMovie extends UserMovie {
   score: number;
 }
 
 export interface UserMovies {
   userId: number;
   toWatch: UserMovie[];
-  watched: WatchedMovie[];
+  watched: UserWatchedMovie[];
 }
 
 const fetchUserMovies = async (user: number): Promise<UserMovies> => {

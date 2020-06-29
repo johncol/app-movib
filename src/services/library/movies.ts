@@ -29,3 +29,10 @@ export interface Movie extends MovieSummary {
     votes: string;
   };
 }
+
+export interface WatchedMovie extends Movie {
+  user: {
+    id: number;
+    rating: number;
+  };
+}

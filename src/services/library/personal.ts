@@ -1,8 +1,9 @@
 import { OMDB } from './../omdb/api';
-import { JsonServer, UserMovies, UserMovie, WatchedMovie } from './../json-server';
+import { JsonServer, UserMovies, UserMovie, UserWatchedMovie } from './../json-server';
 import { Catalog } from './catalogs';
 import { mapper } from './mapper';
-import { Movie } from './movies';
+import { Movie, WatchedMovie } from './movies';
+import { MovieResponse } from '../omdb/movies';
 
 const movies = async (user: number, catalog: Catalog): Promise<Movie[]> => {
   const userMovies: UserMovies = await JsonServer.fetchUserMovies(user);
@@ -17,8 +18,21 @@ const moviesToWatch = (user: number): Promise<Movie[]> => {
   return movies(user, 'toWatch');
 };
 
-const moviesWatched = async (user: number): Promise<Movie[]> => {
-  return movies(user, 'watched');
+const moviesWatched = async (user: number): Promise<WatchedMovie[]> => {
+  const { watched }: UserMovies = await JsonServer.fetchUserMovies(user);
+
+  const movies = watched.map(async (userWatchedMovie: UserWatchedMovie) => {
+    const response: MovieResponse = await OMDB.movie(userWatchedMovie.id);
+    return {
+      ...mapper.toMovie(response),
+      user: {
+        id: user,
+        rating: userWatchedMovie.score,
+      },
+    };
+  });
+
+  return Promise.all(movies);
 };
 
 const addMovieToWatchList = async (user: number, movieId: string): Promise<UserMovies> => {
